@@ -1,5 +1,7 @@
-export type ID = number;
+type ID = number;
 
-export type Identifiable = { id: ID };
+type Identifiable = { id: ID };
 
-export type NewEntity<T> = Omit<T, 'id'>;
+type NewEntity<T> = Omit<T, 'id'>;
+
+export { ID, Identifiable, NewEntity };

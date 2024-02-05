@@ -1,4 +1,4 @@
 import { IModelReader } from '../IModel';
-import { ITeams } from './ITeams';
+import { ITeam } from './ITeam';
 
-export type ITeamModel = IModelReader<ITeams>;
+export type ITeamModel = IModelReader<ITeam>;

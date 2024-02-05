@@ -1,6 +1,6 @@
-import { ITeams } from '../../Interfaces/teams/ITeams';
+import { ITeam } from '../../Interfaces/teams/ITeam';
 
-const teams: ITeams[] = [
+const teams: ITeam[] = [
   {
     id: 1,
     teamName: 'Team 1',
