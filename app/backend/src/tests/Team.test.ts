@@ -24,4 +24,16 @@ describe('Teams Test', () => {
       expect(body).to.be.deep.equal(TeamMock.teams);
     });
   });
+
+  describe('GET /teams/:id', () => {
+    it('should return a team by id', async () => {
+      const mockTeam = STeamModel.build(TeamMock.teams[0]);
+      sinon.stub(STeamModel, 'findOne').resolves(mockTeam);
+
+      const { status, body } = await chai.request(app).get('/teams/1');
+
+      expect(status).to.be.equal(200);
+      expect(body).to.be.deep.equal(TeamMock.teams[0]);
+    });
+  });
 });
