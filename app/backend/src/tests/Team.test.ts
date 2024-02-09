@@ -28,7 +28,7 @@ describe('Teams Test', () => {
   describe('GET /teams/:id', () => {
     it('should return a team by id', async () => {
       const mockTeam = STeamModel.build(TeamMock.teams[0]);
-      sinon.stub(STeamModel, 'findOne').resolves(mockTeam);
+      sinon.stub(STeamModel, 'findByPk').resolves(mockTeam);
 
       const { status, body } = await chai.request(app).get('/teams/1');
 

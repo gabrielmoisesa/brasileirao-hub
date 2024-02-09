@@ -6,6 +6,7 @@ export interface IModelCreator<T> {
 
 export interface IModelReader<T> {
   findAll(): Promise<T[]>;
+  findById(id: ID): Promise<T | null>;
 }
 
 export interface IModelUpdater<T> {
