@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcryptjs';
 import jwtUtil from '../utils/jwt.util';
-import { Token } from '../types/Token';
+import { Token } from '../types/token/Token';
 import { ServiceResponse, ServiceResponseError } from '../types/ServiceResponse';
 import { IUserModel } from '../Interfaces/users/IUserModel';
 import UserModel from '../models/UserModel';

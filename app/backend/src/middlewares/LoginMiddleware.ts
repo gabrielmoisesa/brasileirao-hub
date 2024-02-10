@@ -1,10 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
-import loginSchema from './schemas/login.schema';
+import loginSchema, { invalidFormatMessage } from './schemas/login.schema';
 
 export default class LoginMiddleware {
   static validateBody(req: Request, res: Response, next: NextFunction) {
     const { error } = loginSchema.body.validate(req.body);
-    if (error) return res.status(400).json({ message: 'All fields must be filled' });
+    if (error) {
+      const statusCode = error.message === invalidFormatMessage ? 401 : 400;
+      return res.status(statusCode).json({ message: error.message });
+    }
     next();
   }
 }
