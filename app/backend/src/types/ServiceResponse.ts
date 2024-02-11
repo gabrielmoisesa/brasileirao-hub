@@ -1,8 +1,10 @@
 import { ErrorStatus, SuccessStatus } from './HttpStatus';
 
+type message = { message: string };
+
 type ServiceResponseError = {
   status: ErrorStatus;
-  data: { message: string };
+  data: message;
 };
 
 type ServiceResponseSuccess<T> = {
@@ -12,4 +14,4 @@ type ServiceResponseSuccess<T> = {
 
 type ServiceResponse<T> = ServiceResponseError | ServiceResponseSuccess<T>;
 
-export { ServiceResponseError, ServiceResponseSuccess, ServiceResponse };
+export { message, ServiceResponseError, ServiceResponseSuccess, ServiceResponse };
