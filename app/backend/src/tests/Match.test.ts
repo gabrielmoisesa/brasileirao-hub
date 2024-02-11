@@ -5,6 +5,8 @@ import chaiHttp = require('chai-http');
 import SMatchModel from '../database/models/SMatchModel';
 import MatchMock from './mocks/Match.mock';
 import { app } from '../app';
+import jwtUtil from '../utils/jwt.util';
+import LoginMock from './mocks/Login.mock';
 
 chai.use(chaiHttp);
 
@@ -24,4 +26,21 @@ describe('Matches Test', () => {
       expect(body).to.be.deep.equal(MatchMock.matches);
     });
   });
+
+  describe('POST /matches', () => {
+    it('should create a new match', async () => {
+      const newMatch = SMatchModel.build(MatchMock.matches[0]);
+      sinon.stub(SMatchModel, 'create').resolves(newMatch);
+      const token = jwtUtil.sign(LoginMock.payload);
+
+      const { status, body } = await chai
+        .request(app)
+        .post('/matches')
+        .set('Authorization', `Bearer ${token}`)
+        .send(MatchMock.body);
+
+      expect(status).to.be.equal(201);
+      expect(body).to.be.deep.equal(newMatch);
+    })
+  })
 });

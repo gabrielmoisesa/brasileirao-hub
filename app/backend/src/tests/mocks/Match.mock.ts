@@ -35,6 +35,14 @@ const matches: IMatch[] = [
   },
 ];
 
+const body = {
+  homeTeamId: 1,
+  awayTeamId: 2,
+  homeTeamGoals: 2,
+  awayTeamGoals: 1,
+}
+
 export default {
   matches,
+  body,
 };
