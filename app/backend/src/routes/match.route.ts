@@ -3,8 +3,8 @@ import MatchController from '../controllers/MatchController';
 
 const matchController = new MatchController();
 
-const matchRoutes = Router();
+const matchRoute = Router();
 
-matchRoutes.get('/', (req, res) => matchController.getAll(req, res));
+matchRoute.get('/', (req, res) => matchController.getAll(req, res));
 
-export default matchRoutes;
+export default matchRoute;
