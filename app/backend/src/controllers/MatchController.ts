@@ -16,4 +16,11 @@ export default class MatchController {
     const { status, data } = await this.matchService.finishMatch(id);
     res.status(httpMap(status)).json(data);
   }
+
+  public async updateScore(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const { status, data } = await this.matchService.updateScore(id, homeTeamGoals, awayTeamGoals);
+    res.status(httpMap(status)).json(data);
+  }
 }

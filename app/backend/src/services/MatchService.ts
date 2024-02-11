@@ -20,10 +20,26 @@ export default class MatchService {
   }
 
   public async finishMatch(id: number): Promise<ServiceResponse<message>> {
-    const updated = await this.matchModel.update(id);
+    const updated = await this.matchModel.updateMatchProgress(id);
     return {
       status: updated ? 'OK' : 'BAD_REQUEST',
       data: { message: updated ? 'Finished' : 'Failed' },
+    };
+  }
+
+  public async updateScore(
+    id: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<ServiceResponse<message>> {
+    const updated = await this.matchModel.updateMatchScore(
+      id,
+      homeTeamGoals,
+      awayTeamGoals,
+    );
+    return {
+      status: updated ? 'OK' : 'BAD_REQUEST',
+      data: { message: updated ? 'Updated' : 'Failed' },
     };
   }
 }
