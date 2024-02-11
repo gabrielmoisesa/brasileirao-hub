@@ -26,4 +26,9 @@ export default class MatchModel implements IMatchModel {
 
     return matches;
   }
+
+  async update(id: number): Promise<boolean> {
+    const updatedMatch = await this.model.update({ inProgress: false }, { where: { id } });
+    return updatedMatch[0] === 1;
+  }
 }

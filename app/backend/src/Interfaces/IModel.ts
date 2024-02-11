@@ -9,8 +9,8 @@ export interface IModelReader<T> {
   findById(id: ID): Promise<T | null>;
 }
 
-export interface IModelUpdater<T> {
-  update(id: ID, data: Partial<T>): Promise<T | null>;
+export interface IModelUpdater {
+  update(id: ID): Promise<boolean>;
 }
 
 export interface IModelDeleter {
@@ -20,5 +20,5 @@ export interface IModelDeleter {
 export interface IModel<T>
   extends IModelCreator<T>,
   IModelReader<T>,
-  IModelUpdater<T>,
+  IModelUpdater,
   IModelDeleter {}
