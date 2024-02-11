@@ -7,7 +7,7 @@ import UserMock from './mocks/User.mock';
 import { app } from '../app';
 import LoginMock from './mocks/Login.mock';
 import * as bcrypt from 'bcryptjs';
-import * as jwt from 'jsonwebtoken';
+import jwtUtil from '../utils/jwt.util';
 
 chai.use(chaiHttp);
 
@@ -111,20 +111,16 @@ describe('Login Test', () => {
 
   describe('GET /login/role', () => {
     it('should authenticate with success and return role', async () => {
-      const mockUser = SUserModel.build(UserMock.users[1]);
-      sinon.stub(SUserModel, 'findOne').resolves(mockUser);
-      sinon
-        .stub(jwt, 'verify')
-        .resolves({ id: mockUser.id, role: mockUser.role });
+      const token = jwtUtil.sign(LoginMock.payload);
 
       const { status, body } = await chai
         .request(app)
         .get('/login/role')
-        .set('authorization', 'Bearer token');
+        .set('Authorization', `Bearer ${token}`);
 
       expect(status).to.be.equal(200);
       expect(body).to.have.property('role');
-      expect(body.role).to.be.equal(mockUser.role);
+      expect(body.role).to.be.equal(LoginMock.payload.role);
     });
   });
 });

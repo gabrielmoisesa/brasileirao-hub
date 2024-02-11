@@ -7,6 +7,9 @@ const body = {
   password,
 };
 
+const payload = { id: 1, role: 'admin' };
+
 export default {
   body,
+  payload,
 };
