@@ -27,8 +27,24 @@ export default class MatchModel implements IMatchModel {
     return matches;
   }
 
-  async update(id: number): Promise<boolean> {
-    const updatedMatch = await this.model.update({ inProgress: false }, { where: { id } });
+  async updateMatchProgress(id: number): Promise<boolean> {
+    const updatedMatch = await this.model.update(
+      { inProgress: false },
+      { where: { id } },
+    );
+    return updatedMatch[0] === 1;
+  }
+
+  async updateMatchScore(
+    id: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<boolean> {
+    const updatedMatch = await this.model.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+
     return updatedMatch[0] === 1;
   }
 }
