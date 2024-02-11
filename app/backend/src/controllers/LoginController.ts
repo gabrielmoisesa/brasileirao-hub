@@ -10,4 +10,9 @@ export default class LoginController {
     const { status, data } = await this.loginService.login(email, password);
     res.status(httpMap(status)).json(data);
   }
+
+  public static getRole(req: Request, res: Response) {
+    const { role } = res.locals.auth;
+    res.status(200).json({ role });
+  }
 }
