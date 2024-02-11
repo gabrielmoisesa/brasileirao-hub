@@ -6,6 +6,7 @@ import {
   Model,
 } from 'sequelize';
 import db from '.';
+import STeamModel from './STeamModel';
 
 class SMatchModel extends Model<
 InferAttributes<SMatchModel>,
@@ -56,5 +57,11 @@ SMatchModel.init({
   modelName: 'matches',
   timestamps: false,
 });
+
+STeamModel.hasMany(SMatchModel, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+STeamModel.hasMany(SMatchModel, { foreignKey: 'awayTeamId', as: 'awayTeam' });
+
+SMatchModel.belongsTo(STeamModel, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+SMatchModel.belongsTo(STeamModel, { foreignKey: 'awayTeamId', as: 'awayTeam' });
 
 export default SMatchModel;
