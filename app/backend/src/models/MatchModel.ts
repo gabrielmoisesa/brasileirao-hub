@@ -5,18 +5,19 @@ import STeamModel from '../database/models/STeamModel';
 
 export default class MatchModel implements IMatchModel {
   private model = SMatchModel;
+  private teamModel = STeamModel;
 
   async findAll(): Promise<IMatch[]> {
     const matches = this.model.findAll({
       include: [
         {
-          model: STeamModel,
+          model: this.teamModel,
           as: 'homeTeam',
           foreignKey: 'homeTeamId',
           attributes: ['teamName'],
         },
         {
-          model: STeamModel,
+          model: this.teamModel,
           as: 'awayTeam',
           foreignKey: 'awayTeamId',
           attributes: ['teamName'],
