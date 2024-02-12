@@ -4,6 +4,8 @@ export default function httpMap(status: HttpStatus): number {
   switch (status) {
     case 'OK':
       return 200;
+    case 'CREATED':
+      return 201;
     case 'BAD_REQUEST':
       return 400;
     case 'UNAUTHORIZED':

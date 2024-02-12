@@ -1,4 +1,4 @@
-type SuccessStatus = 'OK';
+type SuccessStatus = 'OK' | 'CREATED';
 
 type ErrorStatus = 'BAD_REQUEST' | 'UNAUTHORIZED' | 'NOT_FOUND' ;
 

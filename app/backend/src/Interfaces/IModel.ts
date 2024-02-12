@@ -1,7 +1,7 @@
 import { ID, NewEntity } from '../types';
 
-export interface IModelCreator<T> {
-  create(data: NewEntity<T>): Promise<T>;
+export interface IModelCreator<T, K> {
+  create(data: NewEntity<T>): Promise<K>;
 }
 
 export interface IModelReader<T> {
@@ -17,8 +17,8 @@ export interface IModelDeleter {
   delete(id: ID): Promise<boolean>;
 }
 
-export interface IModel<T>
-  extends IModelCreator<T>,
+export interface IModel<T, K>
+  extends IModelCreator<T, K>,
   IModelReader<T>,
   IModelUpdater,
   IModelDeleter {}

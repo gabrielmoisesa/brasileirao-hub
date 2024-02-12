@@ -5,7 +5,7 @@ import { IMatch } from './IMatch';
 export type NewMatch = NewEntity<Omit<IMatch, 'inProgress'>>;
 
 export type IMatchModel = Pick<IModelReader<IMatch>, 'findAll'> &
-IModelCreator<IMatch> & {
+IModelCreator<NewMatch, IMatch> & {
   updateMatchProgress(id: number): Promise<boolean>;
   updateMatchScore(
     id: number,
