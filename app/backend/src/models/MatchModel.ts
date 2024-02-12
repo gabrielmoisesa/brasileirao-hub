@@ -1,6 +1,6 @@
 import { IMatch } from '../Interfaces/matches/IMatch';
 import SMatchModel from '../database/models/SMatchModel';
-import { IMatchModel } from '../Interfaces/matches/IMatchModel';
+import { IMatchModel, NewMatch } from '../Interfaces/matches/IMatchModel';
 import STeamModel from '../database/models/STeamModel';
 
 export default class MatchModel implements IMatchModel {
@@ -46,5 +46,10 @@ export default class MatchModel implements IMatchModel {
     );
 
     return updatedMatch[0] === 1;
+  }
+
+  create(data: NewMatch): Promise<IMatch> {
+    const newMatch = this.model.create({ ...data, inProgress: true });
+    return newMatch;
   }
 }
