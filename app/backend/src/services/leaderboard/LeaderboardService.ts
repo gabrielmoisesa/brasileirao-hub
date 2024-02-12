@@ -10,17 +10,48 @@ export default class LeaderboardService {
     private teamModel: ITeamModel = new TeamModel(),
   ) {}
 
-  private static getTeamMatches(teamId: number, matches: IMatch[]): IMatch[] {
+  static getTeamMatches(teamId: number, matches: IMatch[]): IMatch[] {
     return matches.filter(
       (match) => match.homeTeamId === teamId || match.awayTeamId === teamId,
     );
   }
 
-  private static calculateTotalGames(teamMatches: IMatch[]): number {
+  static getTotalGVDL(
+    teamId: number,
+    teamMatches: IMatch[],
+  ): { totalGames: number; totalVictories: number; totalDraws: number; totalLosses: number } {
+    const totalGames = LeaderboardService.calculateTotalGames(teamMatches);
+    const totalVictories = LeaderboardService.calculateTotalVictories(
+      teamId,
+      teamMatches,
+    );
+    const totalDraws = LeaderboardService.calculateTotalDraws(teamMatches);
+    const totalLosses = LeaderboardService.calculateTotalLosses(
+      totalGames,
+      totalVictories,
+      totalDraws,
+    );
+    return { totalGames, totalVictories, totalDraws, totalLosses };
+  }
+
+  static getGoalsFavorAndOwn(teamId: number, teamMatches: IMatch[]):
+  { goalsFavor: number; goalsOwn: number } {
+    const goalsFavor = LeaderboardService.calculateGoalsScored(
+      teamId,
+      teamMatches,
+    );
+    const goalsOwn = LeaderboardService.calculateGoalsConceded(
+      teamId,
+      teamMatches,
+    );
+    return { goalsFavor, goalsOwn };
+  }
+
+  static calculateTotalGames(teamMatches: IMatch[]): number {
     return teamMatches.length;
   }
 
-  private static calculateTotalVictories(
+  static calculateTotalVictories(
     teamId: number,
     teamMatches: IMatch[],
   ): number {
@@ -32,21 +63,39 @@ export default class LeaderboardService {
     }).length;
   }
 
-  private static calculateTotalDraws(teamMatches: IMatch[]): number {
+  static calculateTotalDraws(teamMatches: IMatch[]): number {
     return teamMatches.filter(
       (match) => match.homeTeamGoals === match.awayTeamGoals,
     ).length;
   }
 
-  private static calculateTotalLosses(
+  static calculateTotalLosses(
     totalGames: number,
-    teamWins: number,
+    teamVictories: number,
     teamDraws: number,
   ): number {
-    return totalGames - teamWins - teamDraws;
+    return totalGames - teamVictories - teamDraws;
   }
 
-  private static calculateTotalPoints(wins: number, draws: number): number {
+  static calculateTotalPoints(wins: number, draws: number): number {
     return wins * 3 + draws;
+  }
+
+  static calculateGoalsScored(teamId: number, teamMatches: IMatch[]): number {
+    return teamMatches.reduce((acc, match) => {
+      if (match.homeTeamId === teamId) {
+        return acc + match.homeTeamGoals;
+      }
+      return acc + match.awayTeamGoals;
+    }, 0);
+  }
+
+  static calculateGoalsConceded(teamId: number, teamMatches: IMatch[]): number {
+    return teamMatches.reduce((acc, match) => {
+      if (match.homeTeamId === teamId) {
+        return acc + match.awayTeamGoals;
+      }
+      return acc + match.homeTeamGoals;
+    }, 0);
   }
 }
