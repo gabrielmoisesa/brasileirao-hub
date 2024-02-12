@@ -12,6 +12,8 @@ export default function httpMap(status: HttpStatus): number {
       return 401;
     case 'NOT_FOUND':
       return 404;
+    case 'UNPROCESSABLE_ENTITY':
+      return 422;
     default:
       return 500;
   }
