@@ -31,7 +31,7 @@ const matches: IMatch[] = [
     homeTeamGoals: 0,
     awayTeamId: 1,
     awayTeamGoals: 2,
-    inProgress: false,
+    inProgress: true,
   },
 ];
 
