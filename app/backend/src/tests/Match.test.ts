@@ -40,7 +40,7 @@ describe('Matches Test', () => {
         .send(MatchMock.body);
 
       expect(status).to.be.equal(201);
-      expect(body).to.be.deep.equal(newMatch);
+      expect(body).to.be.deep.equal(MatchMock.matches[0]);
     })
   })
 });
