@@ -10,13 +10,14 @@ export default class LeaderboardCalculator {
   ): ILeaderboard[] {
     return teams.map((team) => {
       const teamMatches = LeaderboardCalculator.getTeamMatches(team.id, matches, type);
-      const totalResults = LeaderboardCalculator.getTotalResults(team.id, teamMatches);
-      const goalsFavorAndOwn = LeaderboardCalculator.getGoalsFavorAndOwn(team.id, teamMatches);
+      const totalMatchesResults = LeaderboardCalculator
+        .getTotalMatchesResults(team.id, teamMatches);
+      const goalsStats = LeaderboardCalculator.getGoalsStats(team.id, teamMatches);
 
       return {
         name: team.teamName,
-        ...totalResults,
-        ...goalsFavorAndOwn,
+        ...totalMatchesResults,
+        ...goalsStats,
       };
     });
   }
@@ -35,7 +36,7 @@ export default class LeaderboardCalculator {
     return matches.filter((match) => match.homeTeamId === teamId || match.awayTeamId === teamId);
   }
 
-  private static getTotalResults(
+  private static getTotalMatchesResults(
     teamId: number,
     teamMatches: IMatch[],
   ): Pick<
@@ -67,8 +68,8 @@ export default class LeaderboardCalculator {
     return { totalGames, totalVictories, totalDraws, totalLosses };
   }
 
-  private static getGoalsFavorAndOwn(teamId: number, teamMatches: IMatch[]):
-  { goalsFavor: number; goalsOwn: number } {
+  private static getGoalsStats(teamId: number, teamMatches: IMatch[]):
+  Pick<ILeaderboard, 'goalsFavor' | 'goalsOwn' | 'goalsBalance'> {
     const goalsFavor = LeaderboardCalculator.calculateGoalsScored(
       teamId,
       teamMatches,
@@ -77,7 +78,8 @@ export default class LeaderboardCalculator {
       teamId,
       teamMatches,
     );
-    return { goalsFavor, goalsOwn };
+    const goalsBalance = LeaderboardCalculator.calculateGoalsBalance(goalsFavor, goalsOwn);
+    return { goalsFavor, goalsOwn, goalsBalance };
   }
 
   private static calculateTotalGames(teamMatches: IMatch[]): number {
@@ -130,5 +132,9 @@ export default class LeaderboardCalculator {
       }
       return acc + match.homeTeamGoals;
     }, 0);
+  }
+
+  private static calculateGoalsBalance(goalsFavor: number, goalsOwn: number): number {
+    return goalsFavor - goalsOwn;
   }
 }
