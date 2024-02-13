@@ -38,7 +38,9 @@ export default class LeaderboardCalculator {
   private static getTotalResults(
     teamId: number,
     teamMatches: IMatch[],
-  ): Omit<ILeaderboard, 'name' | 'goalsFavor' | 'goalsOwn'> {
+  ): Pick<
+    ILeaderboard, 'totalPoints' | 'totalGames' | 'totalVictories' | 'totalDraws' | 'totalLosses'
+    > {
     const totalGVDL = LeaderboardCalculator.getTotalGVDL(teamId, teamMatches);
     const totalPoints = LeaderboardCalculator.calculateTotalPoints(
       totalGVDL.totalVictories,
