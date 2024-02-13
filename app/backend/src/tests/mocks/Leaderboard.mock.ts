@@ -1,4 +1,6 @@
-const leaderboardHome = [
+import { ILeaderboard } from "../../Interfaces/leaderboard/ILeaderboard"
+
+const leaderboardHome: ILeaderboard[] = [
   {
     name: 'Team 1',
     totalPoints: 3,
@@ -8,6 +10,8 @@ const leaderboardHome = [
     totalLosses: 0,
     goalsFavor: 2,
     goalsOwn: 1,
+    goalsBalance: 1,
+    efficiency: '100.00',
   },
   {
     name: 'Team 2',
@@ -18,6 +22,8 @@ const leaderboardHome = [
     totalLosses: 0,
     goalsFavor: 2,
     goalsOwn: 2,
+    goalsBalance: 0,
+    efficiency: '33.33',
   },
   {
     name: 'Team 3',
@@ -28,6 +34,8 @@ const leaderboardHome = [
     totalLosses: 1,
     goalsFavor: 1,
     goalsOwn: 3,
+    goalsBalance: -2,
+    efficiency: '0.00',
   }
 ]
 

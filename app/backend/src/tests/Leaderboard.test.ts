@@ -4,10 +4,10 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import LeaderboardMock from './mocks/Leaderboard.mock';
 import { app } from '../app';
-import SMatchModel from '../database/models/SMatchModel';
 import MatchMock from './mocks/Match.mock';
-import STeamModel from '../database/models/STeamModel';
 import TeamMock from './mocks/Team.mock';
+import MatchService from '../services/MatchService';
+import TeamService from '../services/TeamService';
 
 chai.use(chaiHttp);
 
@@ -18,10 +18,10 @@ describe('Leaderboard Test', () => {
 
   describe('GET /leaderboard/home', () => {
     it('should return the performance of the home teams', async () => {
-      const mockMatches = SMatchModel.bulkBuild(MatchMock.matches);
-      const mockTeams = STeamModel.bulkBuild(TeamMock.teams);
-      sinon.stub(SMatchModel, 'findAll').resolves(mockMatches);
-      sinon.stub(STeamModel, 'findAll').resolves(mockTeams);
+      const mockMatches = MatchMock.matches.slice(0, -1);
+      const mockTeams = TeamMock.teams.slice(0, -1);
+      sinon.stub(MatchService.prototype, 'getAll').resolves({ status: 'OK', data: mockMatches });
+      sinon.stub(TeamService.prototype, 'getAll').resolves({ status: 'OK', data: mockTeams });
 
       const { status, body } = await chai.request(app).get('/leaderboard/home');
 
