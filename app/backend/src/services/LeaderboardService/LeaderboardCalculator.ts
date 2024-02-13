@@ -12,12 +12,16 @@ export default class LeaderboardCalculator {
       const teamMatches = LeaderboardCalculator.getTeamMatches(team.id, matches, type);
       const totalMatchesResults = LeaderboardCalculator
         .getTotalMatchesResults(team.id, teamMatches);
+
       const goalsStats = LeaderboardCalculator.getGoalsStats(team.id, teamMatches);
+      const efficiency = LeaderboardCalculator
+        .calculateEfficiency(totalMatchesResults.totalPoints, totalMatchesResults.totalGames);
 
       return {
         name: team.teamName,
         ...totalMatchesResults,
         ...goalsStats,
+        efficiency,
       };
     });
   }
@@ -136,5 +140,9 @@ export default class LeaderboardCalculator {
 
   private static calculateGoalsBalance(goalsFavor: number, goalsOwn: number): number {
     return goalsFavor - goalsOwn;
+  }
+
+  private static calculateEfficiency(totalPoints: number, totalGames: number): string {
+    return ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
   }
 }
