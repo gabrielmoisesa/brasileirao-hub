@@ -1,20 +1,19 @@
-import MatchModel from '../models/MatchModel';
-import TeamModel from '../models/TeamModel';
-import { ITeamModel } from '../Interfaces/teams/ITeamModel';
-import { IMatchModel } from '../Interfaces/matches/IMatchModel';
-import { IMatch } from '../Interfaces/matches/IMatch';
-import { ServiceResponse } from '../types/ServiceResponse';
-import { ILeaderboard } from '../Interfaces/leaderboard/ILeaderboard';
+import { IMatch } from '../../Interfaces/matches/IMatch';
+import { ServiceResponse } from '../../types/ServiceResponse';
+import { ILeaderboard } from '../../Interfaces/leaderboard/ILeaderboard';
+import MatchService from '../MatchService';
+import TeamService from '../TeamService';
+import { ITeam } from '../../Interfaces/teams/ITeam';
 
 export default class LeaderboardService {
   constructor(
-    private matchModel: IMatchModel = new MatchModel(),
-    private teamModel: ITeamModel = new TeamModel(),
+    private matchService = new MatchService(),
+    private teamService = new TeamService(),
   ) {}
 
   public async getAllHome(): Promise<ServiceResponse<ILeaderboard[]>> {
-    const matches = LeaderboardService.getFinishedMatches(await this.matchModel.findAll());
-    const teams = await this.teamModel.findAll();
+    const matches = (await this.matchService.getAll('false')).data as IMatch[];
+    const teams = (await this.teamService.getAll()).data as ITeam[];
 
     const leaderboard = teams.map((team) => {
       const teamMatches = LeaderboardService.getTeamMatches(team.id, matches, 'home');
@@ -32,10 +31,6 @@ export default class LeaderboardService {
     });
 
     return { status: 'OK', data: leaderboard };
-  }
-
-  private static getFinishedMatches(matches: IMatch[]): IMatch[] {
-    return matches.filter((match) => match.inProgress === false);
   }
 
   private static getTeamMatches(
