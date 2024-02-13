@@ -5,8 +5,9 @@ import httpMap from '../utils/httpMap';
 export default class LeaderboardController {
   constructor(private leaderboardService = new LeaderboardService()) {}
 
-  public async getAllHome(req: Request, res: Response) {
-    const { status, data } = await this.leaderboardService.getAll('home');
+  public async getAll(req: Request, res: Response) {
+    const type = req.url.split('/')[1] as 'home' | 'away';
+    const { status, data } = await this.leaderboardService.getAll(type);
     res.status(httpMap(status)).json(data);
   }
 }
