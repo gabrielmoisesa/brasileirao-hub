@@ -8,7 +8,7 @@ export default class LeaderboardCalculator {
     matches: IMatch[],
     type?: 'home' | 'away',
   ): ILeaderboard[] {
-    return teams.map((team) => {
+    return LeaderboardCalculator.sortLeaderboard(teams.map((team) => {
       const teamMatches = LeaderboardCalculator.getTeamMatches(team.id, matches, type);
       const totalMatchesResults = LeaderboardCalculator
         .getTotalMatchesResults(team.id, teamMatches);
@@ -23,6 +23,18 @@ export default class LeaderboardCalculator {
         ...goalsStats,
         efficiency,
       };
+    }));
+  }
+
+  private static sortLeaderboard(leaderboard: ILeaderboard[]): ILeaderboard[] {
+    return leaderboard.sort((a, b) => {
+      if (a.totalPoints === b.totalPoints) {
+        if (a.goalsBalance === b.goalsBalance) {
+          return b.goalsFavor - a.goalsFavor;
+        }
+        return b.goalsBalance - a.goalsBalance;
+      }
+      return b.totalPoints - a.totalPoints;
     });
   }
 
