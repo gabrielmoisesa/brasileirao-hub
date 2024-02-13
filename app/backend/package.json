@@ -1,5 +1,5 @@
 {
-  "name": "tfc-backend",
+  "name": "brasileirao-hub-backend",
   "version": "1.0.0",
   "description": "",
   "main": "./build/server",
@@ -16,7 +16,7 @@
     "lint": "eslint ./src --ext .ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "gabrielmoisesa",
   "license": "ISC",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "1.0.2",
