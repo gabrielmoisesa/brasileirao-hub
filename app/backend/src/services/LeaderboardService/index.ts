@@ -4,6 +4,7 @@ import { ILeaderboard } from '../../Interfaces/leaderboard/ILeaderboard';
 import MatchService from '../MatchService';
 import TeamService from '../TeamService';
 import { ITeam } from '../../Interfaces/teams/ITeam';
+import LeaderboardCalculator from './LeaderboardCalculator';
 
 export default class LeaderboardService {
   constructor(
@@ -11,24 +12,11 @@ export default class LeaderboardService {
     private teamService = new TeamService(),
   ) {}
 
-  public async getAllHome(): Promise<ServiceResponse<ILeaderboard[]>> {
+  public async getAll(type: 'home' | 'away'): Promise<ServiceResponse<ILeaderboard[]>> {
     const matches = (await this.matchService.getAll('false')).data as IMatch[];
     const teams = (await this.teamService.getAll()).data as ITeam[];
 
-    const leaderboard = teams.map((team) => {
-      const teamMatches = LeaderboardService.getTeamMatches(team.id, matches, 'home');
-      const totalGVDL = LeaderboardService.getTotalGVDL(team.id, teamMatches);
-      const totalPoints = LeaderboardService
-        .calculateTotalPoints(totalGVDL.totalVictories, totalGVDL.totalDraws);
-      const goalsFavorAndOwn = LeaderboardService.getGoalsFavorAndOwn(team.id, teamMatches);
-
-      return {
-        name: team.teamName,
-        totalPoints,
-        ...totalGVDL,
-        ...goalsFavorAndOwn,
-      };
-    });
+    const leaderboard = LeaderboardCalculator.calculate(teams, matches, type);
 
     return { status: 'OK', data: leaderboard };
   }
