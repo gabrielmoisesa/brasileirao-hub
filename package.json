@@ -1,7 +1,7 @@
 {
-  "name": "trybe-futebol-club",
+  "name": "brasileirao-hub",
   "version": "1.0.0",
-  "description": "Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "install:front": "cd ./app/frontend && npm install",
@@ -14,7 +14,7 @@
     "compose:down": "cd app && docker-compose down --remove-orphans",
     "logs": "cd app && docker-compose logs -f"
   },
-  "author": "Trybe",
+  "author": "gabrielmoisesa",
   "devDependencies": {
     "@testing-library/jest-dom": "5.15.0",
     "@testing-library/react": "11.2.7",
