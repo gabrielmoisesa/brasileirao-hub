@@ -12,7 +12,7 @@ export default class LeaderboardService {
     private teamService = new TeamService(),
   ) {}
 
-  public async getAll(type: 'home' | 'away'): Promise<ServiceResponse<ILeaderboard[]>> {
+  public async getAll(type?: 'home' | 'away'): Promise<ServiceResponse<ILeaderboard[]>> {
     const matches = (await this.matchService.getAll('false')).data as IMatch[];
     const teams = (await this.teamService.getAll()).data as ITeam[];
 
