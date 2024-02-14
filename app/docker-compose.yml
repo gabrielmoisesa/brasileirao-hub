@@ -6,6 +6,8 @@ services:
     ports:
       - 3000:3000
     working_dir: /app-frontend
+    volumes:
+      - ./frontend/src:/app-frontend/src
     healthcheck:
       test: [ "CMD", "lsof", "-t", "-i:3000" ]
       timeout: 10s
