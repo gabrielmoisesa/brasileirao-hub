@@ -1,6 +1,6 @@
-import { ILeaderboard } from '../../Interfaces/leaderboard/ILeaderboard';
-import { IMatch } from '../../Interfaces/matches/IMatch';
-import { ITeam } from '../../Interfaces/teams/ITeam';
+import { ILeaderboard } from '../../../Interfaces/leaderboard/ILeaderboard';
+import { IMatch } from '../../../Interfaces/matches/IMatch';
+import { ITeam } from '../../../Interfaces/teams/ITeam';
 
 export default class LeaderboardCalculator {
   public static calculate(
