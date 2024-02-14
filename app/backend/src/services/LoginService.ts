@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcryptjs';
-import jwtUtil from '../utils/jwt.util';
+import JwtUtil from '../utils/JwtUtil';
 import { Token } from '../types/token/Token';
 import { ServiceResponse, ServiceResponseError } from '../types/ServiceResponse';
 import { IUserModel } from '../Interfaces/users/IUserModel';
@@ -23,7 +23,7 @@ export default class LoginService {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) return this.unauthorizedResponse;
 
-    const token = jwtUtil.sign({ id: user.id, role: user.role });
+    const token = JwtUtil.sign({ id: user.id, role: user.role });
 
     return { status: 'OK', data: { token } };
   }

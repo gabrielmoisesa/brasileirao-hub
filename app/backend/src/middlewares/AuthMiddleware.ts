@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import jwtUtil from '../utils/jwt.util';
+import JwtUtil from '../utils/JwtUtil';
 
 export default class AuthMiddleware {
   static extractToken(authorization: string) {
@@ -13,7 +13,7 @@ export default class AuthMiddleware {
     const token = AuthMiddleware.extractToken(authorization);
 
     try {
-      const payload = jwtUtil.verify(token);
+      const payload = JwtUtil.verify(token);
       res.locals.auth = payload;
       next();
     } catch (error) {

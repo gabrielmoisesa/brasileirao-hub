@@ -7,7 +7,7 @@ import UserMock from './mocks/User.mock';
 import { app } from '../app';
 import LoginMock from './mocks/Login.mock';
 import * as bcrypt from 'bcryptjs';
-import jwtUtil from '../utils/jwt.util';
+import JwtUtil from '../utils/JwtUtil';
 
 chai.use(chaiHttp);
 
@@ -111,7 +111,7 @@ describe('Login Test', () => {
 
   describe('GET /login/role', () => {
     it('should authenticate with success and return role', async () => {
-      const token = jwtUtil.sign(LoginMock.payload);
+      const token = JwtUtil.sign(LoginMock.payload);
 
       const { status, body } = await chai
         .request(app)
