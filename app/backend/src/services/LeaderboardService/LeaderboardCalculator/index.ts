@@ -28,6 +28,11 @@ export default class LeaderboardCalculator {
     };
   }
 
+  /**
+   * Sorts the leaderboard array in descending order based on total points, goals balance, and goals favor.
+   * @param leaderboard - The leaderboard array to be sorted.
+   * @returns The sorted leaderboard array.
+   */
   private static sortLeaderboard(leaderboard: ILeaderboard[]): ILeaderboard[] {
     return leaderboard.sort((a, b) => {
       if (a.totalPoints === b.totalPoints) {
