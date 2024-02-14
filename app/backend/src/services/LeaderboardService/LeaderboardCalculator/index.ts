@@ -5,26 +5,27 @@ import GoalsStatsCalculator from './GoalsStatsCalculator';
 import ResultsCalculator from './ResultsCalculator';
 
 export default class LeaderboardCalculator {
-  public static calculate(
-    teams: ITeam[],
-    matches: IMatch[],
-    type?: 'home' | 'away',
-  ): ILeaderboard[] {
-    return LeaderboardCalculator.sortLeaderboard(teams.map((team) => {
+  public static calculate(teams: ITeam[], matches: IMatch[], type?: 'home' | 'away'):
+  ILeaderboard[] {
+    const leaderboard = teams.map((team) => {
       const teamMatches = LeaderboardCalculator.getTeamMatches(team.id, matches, type);
-      const totalMatchesResults = ResultsCalculator.getTotalMatchesResults(team.id, teamMatches);
+      return LeaderboardCalculator.getTeamLeaderboard(team, teamMatches);
+    });
+    return LeaderboardCalculator.sortLeaderboard(leaderboard);
+  }
 
-      const goalsStats = GoalsStatsCalculator.getGoalsStats(team.id, teamMatches);
-      const efficiency = LeaderboardCalculator
-        .calculateEfficiency(totalMatchesResults.totalPoints, totalMatchesResults.totalGames);
+  private static getTeamLeaderboard(team: ITeam, teamMatches: IMatch[]): ILeaderboard {
+    const totalMatchesResults = ResultsCalculator.getTotalMatchesResults(team.id, teamMatches);
+    const goalsStats = GoalsStatsCalculator.getGoalsStats(team.id, teamMatches);
+    const efficiency = LeaderboardCalculator
+      .calculateEfficiency(totalMatchesResults.totalPoints, totalMatchesResults.totalGames);
 
-      return {
-        name: team.teamName,
-        ...totalMatchesResults,
-        ...goalsStats,
-        efficiency,
-      };
-    }));
+    return {
+      name: team.teamName,
+      ...totalMatchesResults,
+      ...goalsStats,
+      efficiency,
+    };
   }
 
   private static sortLeaderboard(leaderboard: ILeaderboard[]): ILeaderboard[] {
