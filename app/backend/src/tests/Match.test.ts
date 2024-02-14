@@ -7,6 +7,8 @@ import MatchMock from './mocks/Match.mock';
 import { app } from '../app';
 import LoginMock from './mocks/Login.mock';
 import JwtUtil from '../utils/JwtUtil';
+import STeamModel from '../database/models/STeamModel';
+import TeamMock from './mocks/Team.mock';
 
 chai.use(chaiHttp);
 
@@ -30,7 +32,10 @@ describe('Matches Test', () => {
   describe('POST /matches', () => {
     it('should create a new match', async () => {
       const newMatch = SMatchModel.build(MatchMock.matches[0]);
+      const mockTeams = STeamModel.bulkBuild(TeamMock.teams);
       sinon.stub(SMatchModel, 'create').resolves(newMatch);
+      sinon.stub(STeamModel, 'findByPk').resolves(mockTeams[0]);
+
       const token = JwtUtil.sign(LoginMock.payload);
 
       const { status, body } = await chai
