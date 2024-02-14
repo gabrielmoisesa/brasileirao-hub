@@ -1,6 +1,7 @@
 import { ILeaderboard } from '../../../Interfaces/leaderboard/ILeaderboard';
 import { IMatch } from '../../../Interfaces/matches/IMatch';
 import { ITeam } from '../../../Interfaces/teams/ITeam';
+import ResultsCalculator from './ResultsCalculator';
 
 export default class LeaderboardCalculator {
   public static calculate(
@@ -10,8 +11,7 @@ export default class LeaderboardCalculator {
   ): ILeaderboard[] {
     return LeaderboardCalculator.sortLeaderboard(teams.map((team) => {
       const teamMatches = LeaderboardCalculator.getTeamMatches(team.id, matches, type);
-      const totalMatchesResults = LeaderboardCalculator
-        .getTotalMatchesResults(team.id, teamMatches);
+      const totalMatchesResults = ResultsCalculator.getTotalMatchesResults(team.id, teamMatches);
 
       const goalsStats = LeaderboardCalculator.getGoalsStats(team.id, teamMatches);
       const efficiency = LeaderboardCalculator
@@ -52,38 +52,6 @@ export default class LeaderboardCalculator {
     return matches.filter((match) => match.homeTeamId === teamId || match.awayTeamId === teamId);
   }
 
-  private static getTotalMatchesResults(
-    teamId: number,
-    teamMatches: IMatch[],
-  ): Pick<
-    ILeaderboard, 'totalPoints' | 'totalGames' | 'totalVictories' | 'totalDraws' | 'totalLosses'
-    > {
-    const totalGVDL = LeaderboardCalculator.getTotalGVDL(teamId, teamMatches);
-    const totalPoints = LeaderboardCalculator.calculateTotalPoints(
-      totalGVDL.totalVictories,
-      totalGVDL.totalDraws,
-    );
-    return { totalPoints, ...totalGVDL };
-  }
-
-  private static getTotalGVDL(
-    teamId: number,
-    teamMatches: IMatch[],
-  ): { totalGames: number; totalVictories: number; totalDraws: number; totalLosses: number } {
-    const totalGames = LeaderboardCalculator.calculateTotalGames(teamMatches);
-    const totalVictories = LeaderboardCalculator.calculateTotalVictories(
-      teamId,
-      teamMatches,
-    );
-    const totalDraws = LeaderboardCalculator.calculateTotalDraws(teamMatches);
-    const totalLosses = LeaderboardCalculator.calculateTotalLosses(
-      totalGames,
-      totalVictories,
-      totalDraws,
-    );
-    return { totalGames, totalVictories, totalDraws, totalLosses };
-  }
-
   private static getGoalsStats(teamId: number, teamMatches: IMatch[]):
   Pick<ILeaderboard, 'goalsFavor' | 'goalsOwn' | 'goalsBalance'> {
     const goalsFavor = LeaderboardCalculator.calculateGoalsScored(
@@ -96,40 +64,6 @@ export default class LeaderboardCalculator {
     );
     const goalsBalance = LeaderboardCalculator.calculateGoalsBalance(goalsFavor, goalsOwn);
     return { goalsFavor, goalsOwn, goalsBalance };
-  }
-
-  private static calculateTotalGames(teamMatches: IMatch[]): number {
-    return teamMatches.length;
-  }
-
-  private static calculateTotalVictories(
-    teamId: number,
-    teamMatches: IMatch[],
-  ): number {
-    return teamMatches.filter((match) => {
-      if (match.homeTeamId === teamId) {
-        return match.homeTeamGoals > match.awayTeamGoals;
-      }
-      return match.awayTeamGoals > match.homeTeamGoals;
-    }).length;
-  }
-
-  private static calculateTotalDraws(teamMatches: IMatch[]): number {
-    return teamMatches.filter(
-      (match) => match.homeTeamGoals === match.awayTeamGoals,
-    ).length;
-  }
-
-  private static calculateTotalLosses(
-    totalGames: number,
-    teamVictories: number,
-    teamDraws: number,
-  ): number {
-    return totalGames - teamVictories - teamDraws;
-  }
-
-  private static calculateTotalPoints(wins: number, draws: number): number {
-    return wins * 3 + draws;
   }
 
   private static calculateGoalsScored(teamId: number, teamMatches: IMatch[]): number {
