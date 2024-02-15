@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom'
-import './App.css'
 import MatchSettings from './pages/MatchSettings'
 import Leaderboard from './pages/Leaderboard'
 import Games from './pages/Games'
