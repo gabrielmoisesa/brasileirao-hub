@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { negativeLogo, exitToAppImg } from '../images';
-import '../styles/components/header.css';
 
 const Header = ({
   page,
@@ -20,12 +19,12 @@ const Header = ({
   };
 
   return (
-    <header className="common-header">
-      <div className="image-content">
-        <img src={ negativeLogo } alt="Trybe Futebol Clube Negative Logo" />
+    <header className="items-center bg-green-600 flex justify-between px-9 py-2 text-white">
+      <div className="justify-start">
+        <img src={ negativeLogo } alt="Brasileirao Negative Logo" className="w-20" />
       </div>
-      <h1 data-testid="header__title">{ page }</h1>
-      <div className="buttons-content">
+      <h1 className="text-2xl">{ page }</h1>
+      <div className="space-x-5">
         <FirstNavigationLink />
         {
           (logged)
