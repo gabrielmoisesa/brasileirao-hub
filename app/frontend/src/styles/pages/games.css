@@ -66,16 +66,6 @@
   background: #002799;
 }
 
-.add-new-game-button {
-  color: #29313d;
-  font-family: Verdana , Tahoma , sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 19px;
-  text-decoration-line: underline;
-}
-
 .games-table {
   display: flex;
   flex-direction: column;
