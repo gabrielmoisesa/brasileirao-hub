@@ -9,11 +9,11 @@ import { Navigate } from 'react-router-dom'
 function App() {
   return (
   <Routes>
+    <Route exact path="/" element={ <Navigate to="/leaderboard" /> } />
     <Route path="matches/settings" element={ <MatchSettings /> } />
     <Route path="/leaderboard" element={ <Leaderboard /> } />
     <Route path="/matches" element={ <Games /> } />
     <Route path="/login" element={ <Login /> } />
-    <Route exact path="/" element={ <Navigate to="/leaderboard" /> } />
   </Routes>
   )
 }
