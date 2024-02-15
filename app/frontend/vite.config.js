@@ -5,4 +5,8 @@ import envCompatible from 'vite-plugin-env-compatible'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), envCompatible()],
+  server: {
+    host: true,
+    port: 3000
+  }
 })
