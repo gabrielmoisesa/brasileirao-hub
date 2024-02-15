@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import GamesTable from '../components/GamesTable';
 import Header from '../components/Header';
 import AddNewMatchBtn from '../components/AddNewMatchBtn';
