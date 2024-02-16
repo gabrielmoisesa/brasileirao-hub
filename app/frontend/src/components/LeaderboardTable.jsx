@@ -3,29 +3,29 @@ import PropTypes from 'prop-types';
 import { requestData } from '../services/requests';
 import Loading from './Loading';
 import { v4 as uuidv4 } from 'uuid';
-import '../styles/components/leaderboardTable.css';
 
 const LeaderboardTable = ({ currentFilter }) => {
   const [leaderboard, setLeaderboard] = useState([]);
 
-  const getLeaderboard = (endpoint) => requestData(endpoint)
-    .then((response) => setLeaderboard(response))
-    .catch((error) => console.log(error));
+  const getLeaderboard = (endpoint) =>
+    requestData(endpoint)
+      .then((response) => setLeaderboard(response))
+      .catch((error) => console.log(error));
 
   useEffect(() => {
     const apiLeaderboard = '/leaderboard';
     const apiLeaderboardHome = '/leaderboard/home';
     const apiLeaderboardAway = '/leaderboard/away';
     switch (currentFilter) {
-    case 'Classificação Mandantes':
-      getLeaderboard(apiLeaderboardHome);
-      break;
-    case 'Classificação Visitantes':
-      getLeaderboard(apiLeaderboardAway);
-      break;
-    default:
-      getLeaderboard(apiLeaderboard);
-      break;
+      case 'Classificação Mandantes':
+        getLeaderboard(apiLeaderboardHome);
+        break;
+      case 'Classificação Visitantes':
+        getLeaderboard(apiLeaderboardAway);
+        break;
+      default:
+        getLeaderboard(apiLeaderboard);
+        break;
     }
   }, [currentFilter]);
 
@@ -38,112 +38,81 @@ const LeaderboardTable = ({ currentFilter }) => {
   }, [leaderboard]);
 
   if (!leaderboard.length) {
-    return (<Loading />);
+    return <Loading />;
   }
 
   return (
-    <section className="score-board-table-section">
-      <table className="score-board-table">
+    <section className='flex flex-col items-center'>
+      <table>
         <thead>
           <tr>
-            <th data-testid="score_boarding__classification">Classificação</th>
-            <th data-testid="score_boarding__team_name">Time</th>
-            <th data-testid="score_boarding__total_points">P</th>
-            <th data-testid="score_boarding__total_games">J</th>
-            <th data-testid="score_boarding__total_victories">V</th>
-            <th data-testid="score_boarding__total_draws">E</th>
-            <th data-testid="score_boarding__total_looses">D</th>
-            <th data-testid="score_boarding__goals_favor">GP</th>
-            <th data-testid="score_boarding__goals_own">GC</th>
-            <th data-testid="score_boarding__goals_balance">SG</th>
-            <th data-testid="score_boarding__efficiency">%</th>
+            <th>Classificação</th>
+            <th>Time</th>
+            <th>P</th>
+            <th>J</th>
+            <th>V</th>
+            <th>E</th>
+            <th>D</th>
+            <th>GP</th>
+            <th>GC</th>
+            <th>SG</th>
+            <th>%</th>
           </tr>
         </thead>
         <tbody>
-          {
-            leaderboard.map(({
-              name,
-              totalPoints,
-              totalGames,
-              totalVictories,
-              totalDraws,
-              totalLosses,
-              goalsFavor,
-              goalsOwn,
-              goalsBalance,
-              efficiency,
-            },
-            index) => (
-              <tr key={ uuidv4() }>
-                <td
-                  className="score-board-classification"
-                  data-testid={ `score_boarding__classification_${index + 1}` }
-                >
+          {leaderboard.map(
+            (
+              {
+                name,
+                totalPoints,
+                totalGames,
+                totalVictories,
+                totalDraws,
+                totalLosses,
+                goalsFavor,
+                goalsOwn,
+                goalsBalance,
+                efficiency,
+              },
+              index
+            ) => (
+              <tr key={uuidv4()}>
+                <td className='bg-green-700 text-white text-center border border-black w-16 h-12'>
                   {`${index + 1}`}
                 </td>
-                <td
-                  className="score-board-team-name"
-                  data-testid={ `score_boarding__team_name_${index + 1}` }
-                >
+                <td className='bg-green-600 text-white text-center border border-black w-16'>
                   {name}
                 </td>
-                <td
-                  className="score-board-total-points"
-                  data-testid={ `score_boarding__total_points_${index + 1}` }
-                >
-                  { totalPoints }
+                <td className='bg-gray-100 text-center border border-black w-16'>
+                  {totalPoints}
                 </td>
-                <td
-                  className="score-board-total-games"
-                  data-testid={ `score_boarding__total_games_${index + 1}` }
-                >
-                  { totalGames }
+                <td className='bg-gray-200 text-center border border-black w-16'>
+                  {totalGames}
                 </td>
-                <td
-                  className="score-board-total-victories"
-                  data-testid={ `score_boarding__total_victories_${index + 1}` }
-                >
-                  { totalVictories }
+                <td className='bg-gray-100 text-center border border-black w-16'>
+                  {totalVictories}
                 </td>
-                <td
-                  className="score-board-total-draws"
-                  data-testid={ `score_boarding__total_draws_${index + 1}` }
-                >
-                  { totalDraws }
+                <td className='bg-gray-200 text-center border border-black w-16'>
+                  {totalDraws}
                 </td>
-                <td
-                  className="score-board-total-looses"
-                  data-testid={ `score_boarding__total_looses_${index + 1}` }
-                >
-                  { totalLosses }
+                <td className='bg-gray-100 text-center border border-black w-16'>
+                  {totalLosses}
                 </td>
-                <td
-                  className="score-board-goals-favor"
-                  data-testid={ `score_boarding__goals_favor_${index + 1}` }
-                >
-                  { goalsFavor }
+                <td className='bg-gray-200 text-center border border-black w-16'>
+                  {goalsFavor}
                 </td>
-                <td
-                  className="score-board-goals-own"
-                  data-testid={ `score_boarding__goals_own_${index + 1}` }
-                >
-                  { goalsOwn }
+                <td className='bg-gray-100 text-center border border-black w-16'>
+                  {goalsOwn}
                 </td>
-                <td
-                  className="score-board-goals-balance"
-                  data-testid={ `score_boarding__goals_balance_${index + 1}` }
-                >
-                  { goalsBalance }
+                <td className='bg-gray-200 text-center border border-black w-16'>
+                  {goalsBalance}
                 </td>
-                <td
-                  className="score-board-efficiency"
-                  data-testid={ `score_boarding__efficiency_${index + 1}` }
-                >
-                  { efficiency }
+                <td className='bg-gray-200 text-center border border-black w-16'>
+                  {efficiency}
                 </td>
               </tr>
-            ))
-          }
+            )
+          )}
         </tbody>
       </table>
     </section>
@@ -153,4 +122,5 @@ const LeaderboardTable = ({ currentFilter }) => {
 LeaderboardTable.propTypes = {
   currentFilter: PropTypes.string.isRequired,
 };
+
 export default LeaderboardTable;
