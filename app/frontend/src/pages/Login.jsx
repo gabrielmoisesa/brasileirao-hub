@@ -5,7 +5,6 @@ import LeaderboardBtn from '../components/LeaderboardBtn';
 import MatchesBtn from '../components/MatchesBtn';
 import { requestLogin, setToken, requestData } from '../services/requests';
 import { positiveLogo } from '../images';
-import '../styles/pages/login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,8 +22,8 @@ const Login = () => {
 
       const { role } = await requestData('/login/role', { email, password });
 
-      localStorage.setItem('token',  token);
-      localStorage.setItem('role',  role);
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
 
       setIsLogged(true);
     } catch (error) {
@@ -37,54 +36,51 @@ const Login = () => {
     setFailedTryLogin(false);
   }, [email, password]);
 
-  if (isLogged) return <Navigate to="/matches" />;
+  if (isLogged) return <Navigate to='/matches' />;
 
   return (
     <>
       <Header
-        page="LOGIN"
-        FirstNavigationLink={ LeaderboardBtn }
-        SecondNavegationLink={ MatchesBtn }
+        page='LOGIN'
+        FirstNavigationLink={LeaderboardBtn}
+        SecondNavegationLink={MatchesBtn}
       />
-      <section className="user-login-area">
-        <img src={ positiveLogo } alt="Trybe Futebol Clube Negative Logo" />
-        <form>
-          <h1>Área do usuário</h1>
-          <label htmlFor="email-input">
+      <section className='flex flex-col items-center space-y-10 mt-10'>
+        <img
+          className='h-56'
+          src={positiveLogo}
+          alt='Brasileirao Positive Logo'
+        />
+        <form className='flex flex-col text-center space-y-5'>
+          <h1 className='text-2xl'>Área do usuário</h1>
+          <label htmlFor='email-input'>
             <input
-              className="login__login_input"
-              type="text"
-              value={ email }
-              onChange={ ({ target: { value } }) => setEmail(value) }
-              data-testid="login__login_input"
-              placeholder="Login"
+              className='border h-10 p-2 rounded-md'
+              type='text'
+              value={email}
+              onChange={({ target: { value } }) => setEmail(value)}
+              placeholder='Login'
             />
           </label>
-          <label htmlFor="password-input">
+          <label htmlFor='password-input'>
             <input
-              type="password"
-              value={ password }
-              onChange={ ({ target: { value } }) => setPassword(value) }
-              data-testid="login__password_input"
-              placeholder="Senha"
+              className='border h-10 p-2 rounded-md'
+              type='password'
+              value={password}
+              onChange={({ target: { value } }) => setPassword(value)}
+              placeholder='Senha'
             />
           </label>
-          {
-            (failedTryLogin)
-              ? (
-                <p data-testid="login__input_invalid_login_alert">
-                  {
-                    `O endereço de e-mail ou a senha não estão corretos.
-                    Por favor, tente novamente.`
-                  }
-                </p>
-              )
-              : null
-          }
+          {failedTryLogin ? (
+            <p>
+              {`O endereço de e-mail ou a senha não estão corretos.
+                    Por favor, tente novamente.`}
+            </p>
+          ) : null}
           <button
-            data-testid="login__login_btn"
-            type="submit"
-            onClick={ (event) => login(event) }
+            className='bg-blue-600 text-white h-10 rounded-md'
+            type='submit'
+            onClick={(event) => login(event)}
           >
             Entrar
           </button>
