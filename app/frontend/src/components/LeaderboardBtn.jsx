@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom';
 
-const LeaderboardBtn = () => (
-  <Link data-testid="header__show_classification_btn" to="/leaderboard">
-    Classificação
-  </Link>
-);
+const LeaderboardBtn = () => <Link to='/leaderboard'>Classificação</Link>;
 
 export default LeaderboardBtn;
