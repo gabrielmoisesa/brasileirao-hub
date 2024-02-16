@@ -8,22 +8,18 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
 
   return (
     <form>
-      <label htmlFor="game-filter">
+      <label htmlFor='game-filter'>
         Partidas:
-        <select
-          id="game-filter"
-          defaultValue={ currentFilter }
-          data-testid="matches__option_show_finish_matches"
-        >
+        <select id='game-filter' defaultValue={currentFilter}>
           <option>Todos os Jogos</option>
           <option>Em andamento</option>
           <option>Finalizado</option>
         </select>
       </label>
       <button
-        data-testid="matches__search_match_btn"
-        type="button"
-        onClick={ () => handleCurrentFilter() }
+        className='border bg-blue-600 hover:bg-blue-800 text-white rounded-md h-10 w-40 disabled:hover:cursor-not-allowed'
+        type='button'
+        onClick={() => handleCurrentFilter()}
       >
         Buscar
       </button>
@@ -31,9 +27,9 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
   );
 };
 
-GamerFilter.propTypes = ({
+GamerFilter.propTypes = {
   currentFilter: PropTypes.string,
   setCurrentFilter: PropTypes.func,
-}).isRequired;
+}.isRequired;
 
 export default GamerFilter;
