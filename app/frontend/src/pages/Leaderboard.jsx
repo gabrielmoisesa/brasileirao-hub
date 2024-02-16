@@ -4,7 +4,6 @@ import LeaderboardTable from '../components/LeaderboardTable';
 import LoginBtn from '../components/LoginBtn';
 import MatchesBtn from '../components/MatchesBtn';
 import TableFilter from '../components/TableFilter';
-import '../styles/pages/leaderboard.css';
 
 const Leaderboard = () => {
   const [logged, setLogin] = useState(false);
@@ -18,21 +17,21 @@ const Leaderboard = () => {
   return (
     <>
       <Header
-        page="CLASSIFICAÇÃO"
-        FirstNavigationLink={ MatchesBtn }
-        SecondNavegationLink={ LoginBtn }
-        logged={ logged }
-        setLogin={ setLogin }
+        page='CLASSIFICAÇÃO'
+        FirstNavigationLink={MatchesBtn}
+        SecondNavegationLink={LoginBtn}
+        logged={logged}
+        setLogin={setLogin}
       />
-      <div className="classification-handlers score-board-table-section">
+      <div className='flex flex-col my-10 items-center'>
         <TableFilter
-          currentFilter={ currentFilter }
-          setCurrentFilter={ setCurrentFilter }
+          currentFilter={currentFilter}
+          setCurrentFilter={setCurrentFilter}
         />
       </div>
       <LeaderboardTable
-        currentFilter={ currentFilter }
-        setCurrentFilter={ setCurrentFilter }
+        currentFilter={currentFilter}
+        setCurrentFilter={setCurrentFilter}
       />
     </>
   );

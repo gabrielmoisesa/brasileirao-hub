@@ -42,7 +42,7 @@ const LeaderboardTable = ({ currentFilter }) => {
   }
 
   return (
-    <section className='flex flex-col items-center'>
+    <section className='flex flex-col items-center mb-6'>
       <table>
         <thead>
           <tr>

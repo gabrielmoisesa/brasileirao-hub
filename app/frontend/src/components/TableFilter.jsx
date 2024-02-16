@@ -9,16 +9,24 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
   };
 
   return (
-    <form>
-      <label htmlFor='classification-filter'>
+    <form className='flex items-center space-x-6'>
+      <label className='text-lg' htmlFor='classification-filter'>
         Partidas:
-        <select id='classification-filter' defaultValue={currentFilter}>
+        <select
+          className='h-8 ml-2 text-base bg-gray-100 border rounded-md border-gray-3'
+          id='classification-filter'
+          defaultValue={currentFilter}
+        >
           <option>Classificação Geral</option>
           <option>Classificação Mandantes</option>
           <option>Classificação Visitantes</option>
         </select>
       </label>
-      <button type='button' onClick={() => handleCurrentFilter()}>
+      <button
+        className='border bg-blue-600 hover:bg-blue-800 text-white rounded-md h-10 w-40 disabled:hover:cursor-not-allowed'
+        type='button'
+        onClick={() => handleCurrentFilter()}
+      >
         Buscar
       </button>
     </form>
