@@ -107,7 +107,7 @@ const LeaderboardTable = ({ currentFilter }) => {
                 <td className='bg-gray-200 text-center border border-black w-16'>
                   {goalsBalance}
                 </td>
-                <td className='bg-gray-200 text-center border border-black w-16'>
+                <td className='bg-gray-100 text-center border border-black w-16'>
                   {efficiency}
                 </td>
               </tr>
