@@ -1,20 +1,23 @@
 import PropTypes from 'prop-types';
 
-const Scoreboard = ({ homeTeam, score, setScore, qtyGoal, testId }) => (
-  <label htmlFor={ (homeTeam) ? 'home-team-scoreboard' : 'away-team-scoreboard' }>
+const Scoreboard = ({ homeTeam, score, setScore, qtyGoal }) => (
+  <label
+    className='text-center'
+    htmlFor={homeTeam ? 'home-team-scoreboard' : 'away-team-scoreboard'}
+  >
     <p>Gols</p>
     <input
-      data-testid={ testId }
-      type="number"
-      min="0"
-      value={ score }
-      onChange={ ({ target: { value } }) => {
+      className='border-gray-300 border rounded-md text-center w-20'
+      type='number'
+      min='0'
+      value={score}
+      onChange={({ target: { value } }) => {
         if (value < qtyGoal) {
           setScore(qtyGoal);
         } else {
           setScore(value);
         }
-      } }
+      }}
     />
   </label>
 );
@@ -24,7 +27,6 @@ Scoreboard.propTypes = {
   score: PropTypes.number,
   setScore: PropTypes.func.isRequired,
   qtyGoal: PropTypes.string,
-  testId: PropTypes.string.isRequired,
 };
 
 Scoreboard.defaultProps = {

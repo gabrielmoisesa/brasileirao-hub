@@ -6,7 +6,6 @@ import Header from '../components/Header';
 import MatchesBtn from '../components/MatchesBtn';
 import Loading from '../components/Loading';
 import api, { requestData, setToken } from '../services/requests';
-import '../styles/pages/matchSettings.css';
 
 const MatchSettings = () => {
   const [teams, setTeams] = useState([]);
@@ -51,7 +50,11 @@ const MatchSettings = () => {
 
   const getTeam = (team, homeOrAway) => {
     const { id } = teams.find(({ teamName }) => teamName === team);
-    if (homeOrAway === 'homeTeam') { setHomeTeamId(id); } else { setAwayTeamId(id); }
+    if (homeOrAway === 'homeTeam') {
+      setHomeTeamId(id);
+    } else {
+      setAwayTeamId(id);
+    }
   };
 
   const createMatch = async () => {
@@ -76,7 +79,8 @@ const MatchSettings = () => {
   if (!isAuthenticated) return <Loading />;
 
   if (location.state) {
-    const { id,
+    const {
+      id,
       homeTeam: homeTeamState,
       homeTeamGoals,
       awayTeam: awayTeamState,
@@ -85,20 +89,20 @@ const MatchSettings = () => {
     return (
       <>
         <Header
-          page="EDITAR PARTIDA"
-          FirstNavigationLink={ MatchesBtn }
-          logged={ isAuthenticated }
-          setLogin={ setIsAuthenticated }
+          page='EDITAR PARTIDA'
+          FirstNavigationLink={MatchesBtn}
+          logged={isAuthenticated}
+          setLogin={setIsAuthenticated}
         />
         <EditGame
-          homeTeam={ [homeTeamState] }
-          awayTeam={ [awayTeamState] }
-          homeTeamGoals={ homeTeamGoals }
-          awayTeamGoals={ awayTeamGoals }
-          idMatch={ id }
-          updateMatch={ updateMatch }
-          finishMatch={ finishMatch }
-          getTeam={ getTeam }
+          homeTeam={[homeTeamState]}
+          awayTeam={[awayTeamState]}
+          homeTeamGoals={homeTeamGoals}
+          awayTeamGoals={awayTeamGoals}
+          idMatch={id}
+          updateMatch={updateMatch}
+          finishMatch={finishMatch}
+          getTeam={getTeam}
         />
       </>
     );
@@ -107,18 +111,18 @@ const MatchSettings = () => {
   return (
     <>
       <Header
-        page="ADICIONAR PARTIDA"
-        FirstNavigationLink={ MatchesBtn }
-        logged={ isAuthenticated }
-        setLogin={ setIsAuthenticated }
+        page='ADICIONAR PARTIDA'
+        FirstNavigationLink={MatchesBtn}
+        logged={isAuthenticated}
+        setLogin={setIsAuthenticated}
       />
       <CreateNewGame
-        setHomeTeamScoreboard={ setHomeTeamScoreboard }
-        setAwayTeamScoreboard={ setAwayTeamScoreboard }
-        teams={ teams }
-        getTeam={ getTeam }
-        createMatch={ createMatch }
-        finishMatch={ finishMatch }
+        setHomeTeamScoreboard={setHomeTeamScoreboard}
+        setAwayTeamScoreboard={setAwayTeamScoreboard}
+        teams={teams}
+        getTeam={getTeam}
+        createMatch={createMatch}
+        finishMatch={finishMatch}
       />
     </>
   );

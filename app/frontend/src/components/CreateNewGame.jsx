@@ -20,62 +20,57 @@ const CreateNewGame = ({
   const [createdMatch, setCreatedMatch] = useState(notCreated);
 
   return (
-    <section className="match-settings-section">
-      <form className="match-settings-form">
-        <div className="match-settings-form-options">
+    <section className='flex justify-center m-40'>
+      <form className='flex-col bg-white shadow-lg h-96 px-32 py-16 space-y-10'>
+        <div className='flex items-center'>
           <TeamOption
-            testId="insertion_matches__select_home_team"
-            teams={ teams }
-            setTeams={ setTeams }
+            teams={teams}
+            setTeams={setTeams}
             homeTeam
-            getTeam={ getTeam }
+            getTeam={getTeam}
           />
           <Scoreboard
-            testId="insertion_matches__select_quantity_goals_home_team"
             homeTeam
-            score={ homeTeamScoreboard }
-            setScore={ setHomeTeamScoreboard }
+            score={homeTeamScoreboard}
+            setScore={setHomeTeamScoreboard}
           />
-          <div className="match-settings-form-versus">
-            <span />
+          <div className='m-2 mt-7'>
             <span>X</span>
           </div>
           <Scoreboard
-            testId="insertion_matches__select_quantity_goals_away_team"
-            homeTeam={ false }
-            score={ awayTeamScoreboard }
-            setScore={ setAwayTeamScoreboard }
+            homeTeam={false}
+            score={awayTeamScoreboard}
+            setScore={setAwayTeamScoreboard}
           />
           <TeamOption
-            testId="insertion_matches__select_away_team"
-            teams={ teams }
-            setTeams={ setTeams }
-            homeTeam={ false }
-            getTeam={ getTeam }
+            teams={teams}
+            setTeams={setTeams}
+            homeTeam={false}
+            getTeam={getTeam}
           />
         </div>
-        <div className="match-settings-form-buttons">
+        <div className='flex justify-center space-x-6'>
           <button
-            data-testid="insertion_matches__save_match_btn"
-            onClick={ async () => {
+            className='border bg-blue-600 hover:bg-blue-800 text-white rounded-md h-10 w-40 disabled:hover:cursor-not-allowed'
+            onClick={async () => {
               const body = await createMatch();
               setCreatedMatch(body);
               setInProgress('In-Progress');
-            } }
-            type="button"
-            disabled={ (inProgress !== notCreated) }
+            }}
+            type='button'
+            disabled={inProgress !== notCreated}
           >
             Salvar Partida
-
           </button>
           <button
-            data-testid="insertion_matches__finish_match_btn"
-            onClick={ () => { finishMatch(createdMatch.id); } }
-            type="button"
-            disabled={ (inProgress === notCreated) }
+            className='border border-blue-600 rounded-md h-10 w-40 disabled:hover:cursor-not-allowed'
+            onClick={() => {
+              finishMatch(createdMatch.id);
+            }}
+            type='button'
+            disabled={inProgress === notCreated}
           >
             Finalizar Partida
-
           </button>
         </div>
       </form>
@@ -83,7 +78,7 @@ const CreateNewGame = ({
   );
 };
 
-CreateNewGame.propTypes = ({
+CreateNewGame.propTypes = {
   teams: PropTypes.arrayOf(PropTypes.object),
   setTeams: PropTypes.func,
   getTeam: PropTypes.func,
@@ -91,6 +86,6 @@ CreateNewGame.propTypes = ({
   setHomeTeamScoreboard: PropTypes.func,
   awayTeamScoreboard: PropTypes.string,
   setAwayTeamScoreboard: PropTypes.func,
-}).isRequired;
+}.isRequired;
 
 export default CreateNewGame;
