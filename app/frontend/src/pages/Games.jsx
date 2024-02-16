@@ -5,7 +5,6 @@ import AddNewMatchBtn from '../components/AddNewMatchBtn';
 import LeaderboardBtn from '../components/LeaderboardBtn';
 import LoginBtn from '../components/LoginBtn';
 import GamerFilter from '../components/GameFilter';
-import '../styles/pages/games.css';
 
 const Games = () => {
   const [currentFilter, setCurrentFilter] = useState('Status do Jogo');
@@ -16,32 +15,28 @@ const Games = () => {
     const token = localStorage.getItem('token') || false;
     const role = localStorage.getItem('role') || false;
     if (token) setLogin(true);
-    
+
     setIsAdm(role === 'admin');
   }, []);
 
   return (
     <>
       <Header
-        page="PARTIDAS"
-        FirstNavigationLink={ LeaderboardBtn }
-        SecondNavegationLink={ LoginBtn }
-        logged={ logged }
-        setLogin={ setLogin }
+        page='PARTIDAS'
+        FirstNavigationLink={LeaderboardBtn}
+        SecondNavegationLink={LoginBtn}
+        logged={logged}
+        setLogin={setLogin}
       />
-      <section className="games-section">
-        <div className="games-handlers">
+      <section>
+        <div>
           <GamerFilter
-            currentFilter={ currentFilter }
-            setCurrentFilter={ setCurrentFilter }
+            currentFilter={currentFilter}
+            setCurrentFilter={setCurrentFilter}
           />
-          {
-            (isAdm)
-              ? <AddNewMatchBtn />
-              : null
-          }
+          {isAdm ? <AddNewMatchBtn /> : null}
         </div>
-        <GamesTable currentFilter={ currentFilter } isAdm={ isAdm } />
+        <GamesTable currentFilter={currentFilter} isAdm={isAdm} />
       </section>
     </>
   );
