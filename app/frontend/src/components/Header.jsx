@@ -19,23 +19,25 @@ const Header = ({
   };
 
   return (
-    <header className="items-center bg-green-600 flex justify-between px-9 py-2 text-white">
-      <div className="justify-start">
-        <img src={ negativeLogo } alt="Brasileirao Negative Logo" className="w-20" />
+    <header className='items-center bg-green-600 flex justify-between px-9 py-2 text-white'>
+      <div className='justify-start'>
+        <img
+          src={negativeLogo}
+          alt='Brasileirao Negative Logo'
+          className='w-20'
+        />
       </div>
-      <h1 className="text-2xl">{ page }</h1>
-      <div className="space-x-5">
+      <h1 className='text-2xl'>{page}</h1>
+      <div className='space-x-5'>
         <FirstNavigationLink />
-        {
-          (logged)
-            ? (
-              <button type="button" onClick={ () => logoff() }>
-                Sair
-                <img src={ exitToAppImg } alt="Sair do aplicativo" />
-              </button>
-            )
-            : <SecondNavegationLink />
-        }
+        {logged ? (
+          <button type='button' onClick={() => logoff()}>
+            Sair
+            <img src={exitToAppImg} alt='Sair do aplicativo' />
+          </button>
+        ) : (
+          <SecondNavegationLink />
+        )}
       </div>
     </header>
   );
