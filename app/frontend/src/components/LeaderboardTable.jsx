@@ -77,10 +77,10 @@ const LeaderboardTable = ({ currentFilter }) => {
               index
             ) => (
               <tr key={uuidv4()}>
-                <td className='bg-green-700 text-white text-center border border-black w-16 h-12'>
+                <td className='bg-blue-900 text-white text-center border border-black w-16 h-12'>
                   {`${index + 1}`}
                 </td>
-                <td className='bg-green-600 text-white text-center border border-black w-16'>
+                <td className='bg-blue-800 text-white text-center border border-black w-16'>
                   {name}
                 </td>
                 <td className='bg-gray-100 text-center border border-black w-16'>
