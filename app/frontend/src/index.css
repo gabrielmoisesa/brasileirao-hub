@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-color: #fafafa;
+  --green-600: #1e40af;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -15,5 +20,12 @@ input::-webkit-inner-spin-button {
 }
 
 body {
-  background-color: rgb(250, 250, 250);
+  background-color: var(--bg-color);
+}
+
+.angled-header {
+  width: 0;
+  height: 0;
+  border-bottom: 6rem solid var(--green-600);
+  border-left: 3rem solid transparent;
 }

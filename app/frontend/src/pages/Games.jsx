@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import GamesTable from '../components/GamesTable';
 import Header from '../components/Header';
 import AddNewMatchBtn from '../components/AddNewMatchBtn';
-import LeaderboardBtn from '../components/LeaderboardBtn';
-import LoginBtn from '../components/LoginBtn';
 import GamerFilter from '../components/GameFilter';
 
 const Games = () => {
@@ -21,13 +19,7 @@ const Games = () => {
 
   return (
     <>
-      <Header
-        page='PARTIDAS'
-        FirstNavigationLink={LeaderboardBtn}
-        SecondNavegationLink={LoginBtn}
-        logged={logged}
-        setLogin={setLogin}
-      />
+      <Header page={2} logged={logged} setLogin={setLogin} />
       <section>
         <div>
           <GamerFilter

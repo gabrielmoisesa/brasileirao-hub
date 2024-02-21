@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import CreateNewGame from '../components/CreateNewGame';
 import EditGame from '../components/EditGame';
 import Header from '../components/Header';
-import MatchesBtn from '../components/MatchesBtn';
 import Loading from '../components/Loading';
 import api, { requestData, setToken } from '../services/requests';
 
@@ -89,8 +88,7 @@ const MatchSettings = () => {
     return (
       <>
         <Header
-          page='EDITAR PARTIDA'
-          FirstNavigationLink={MatchesBtn}
+          page={2}
           logged={isAuthenticated}
           setLogin={setIsAuthenticated}
         />
@@ -110,12 +108,7 @@ const MatchSettings = () => {
 
   return (
     <>
-      <Header
-        page='ADICIONAR PARTIDA'
-        FirstNavigationLink={MatchesBtn}
-        logged={isAuthenticated}
-        setLogin={setIsAuthenticated}
-      />
+      <Header page={2} logged={isAuthenticated} setLogin={setIsAuthenticated} />
       <CreateNewGame
         setHomeTeamScoreboard={setHomeTeamScoreboard}
         setAwayTeamScoreboard={setAwayTeamScoreboard}

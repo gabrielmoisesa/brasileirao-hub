@@ -1,13 +1,17 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { negativeLogo, exitToAppImg } from '../images';
+import { exitToAppImg, positiveLogo } from '../images';
+import LeaderboardBtn from './LeaderboardBtn';
+import MatchesBtn from './MatchesBtn';
+import LoginBtn from './LoginBtn';
 
 const Header = ({
-  page,
-  FirstNavigationLink,
-  SecondNavegationLink,
   logged,
   setLogin,
+  page,
+  FirstNavLink = LeaderboardBtn,
+  SecondNavLink = MatchesBtn,
+  ThirdNavLink = LoginBtn,
 }) => {
   const navigate = useNavigate();
 
@@ -18,25 +22,28 @@ const Header = ({
     navigate('/leaderboard');
   };
 
+  const activePageClass = 'underline';
+
   return (
-    <header className='items-center bg-green-600 flex justify-between px-9 py-2 text-white'>
-      <div className='justify-start'>
+    <header className='flex items-center text-white'>
+      <div className='h-24 flex items-center ml-4 mr-1'>
         <img
-          src={negativeLogo}
-          alt='Brasileirao Negative Logo'
-          className='w-20'
+          src={positiveLogo}
+          alt='Brasileirao Positive Logo'
+          className='h-24 w-28'
         />
       </div>
-      <h1 className='text-2xl'>{page}</h1>
-      <div className='space-x-5'>
-        <FirstNavigationLink />
+      <span className='angled-header'></span>
+      <div className='bg-blue-800 h-24 w-full pl-4 flex items-center space-x-7'>
+        <FirstNavLink className={page === 1 && activePageClass} />
+        <SecondNavLink className={page === 2 && activePageClass} />
         {logged ? (
           <button type='button' onClick={() => logoff()}>
             Sair
             <img src={exitToAppImg} alt='Sair do aplicativo' />
           </button>
         ) : (
-          <SecondNavegationLink />
+          <ThirdNavLink className={page === 3 && activePageClass} />
         )}
       </div>
     </header>
@@ -44,17 +51,12 @@ const Header = ({
 };
 
 Header.propTypes = {
-  page: PropTypes.string.isRequired,
-  FirstNavigationLink: PropTypes.elementType.isRequired,
-  SecondNavegationLink: PropTypes.elementType,
   logged: PropTypes.bool,
   setLogin: PropTypes.func,
-};
-
-Header.defaultProps = {
-  SecondNavegationLink: null,
-  logged: undefined,
-  setLogin: undefined,
+  page: PropTypes.number,
+  FirstNavLink: PropTypes.elementType,
+  SecondNavLink: PropTypes.elementType,
+  ThirdNavLink: PropTypes.elementType,
 };
 
 export default Header;
