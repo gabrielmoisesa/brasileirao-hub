@@ -43,7 +43,9 @@ const Header = ({
         <FirstNavLink
           className={pathName === '/leaderboard' && activePageClass}
         />
-        <SecondNavLink className={pathName === '/matches' && activePageClass} />
+        <SecondNavLink
+          className={pathName.includes('/matches') && activePageClass}
+        />
         {logged ? (
           <button type='button' onClick={() => logoff()}>
             Sair
