@@ -1,19 +1,24 @@
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { exitToAppImg, positiveLogo } from '../images';
 import LeaderboardBtn from './LeaderboardBtn';
 import MatchesBtn from './MatchesBtn';
 import LoginBtn from './LoginBtn';
+import { useEffect, useState } from 'react';
 
 const Header = ({
-  logged,
-  setLogin,
-  page,
   FirstNavLink = LeaderboardBtn,
   SecondNavLink = MatchesBtn,
   ThirdNavLink = LoginBtn,
 }) => {
+  const [logged, setLogin] = useState(false);
   const navigate = useNavigate();
+  const pathName = useLocation().pathname;
+
+  useEffect(() => {
+    const token = localStorage.getItem('token') || false;
+    if (token) setLogin(true);
+  }, []);
 
   const logoff = () => {
     localStorage.removeItem('token');
@@ -35,15 +40,17 @@ const Header = ({
       </div>
       <span className='angled-header'></span>
       <div className='bg-blue-800 h-24 w-full pl-4 flex items-center space-x-7'>
-        <FirstNavLink className={page === 1 && activePageClass} />
-        <SecondNavLink className={page === 2 && activePageClass} />
+        <FirstNavLink
+          className={pathName === '/leaderboard' && activePageClass}
+        />
+        <SecondNavLink className={pathName === '/matches' && activePageClass} />
         {logged ? (
           <button type='button' onClick={() => logoff()}>
             Sair
             <img src={exitToAppImg} alt='Sair do aplicativo' />
           </button>
         ) : (
-          <ThirdNavLink className={page === 3 && activePageClass} />
+          <ThirdNavLink className={pathName === '/login' && activePageClass} />
         )}
       </div>
     </header>

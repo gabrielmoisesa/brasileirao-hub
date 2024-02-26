@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import Header from '../components/Header';
 import { requestLogin, setToken, requestData } from '../services/requests';
 import { positiveLogo } from '../images';
 
@@ -38,7 +37,6 @@ const Login = () => {
 
   return (
     <>
-      <Header page={3} />
       <section className='flex flex-col items-center space-y-10 mt-10'>
         <img
           className='h-56'

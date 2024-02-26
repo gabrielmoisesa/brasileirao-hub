@@ -1,25 +1,19 @@
 import { useState, useEffect } from 'react';
 import GamesTable from '../components/GamesTable';
-import Header from '../components/Header';
 import AddNewMatchBtn from '../components/AddNewMatchBtn';
 import GamerFilter from '../components/GameFilter';
 
 const Games = () => {
   const [currentFilter, setCurrentFilter] = useState('Status do Jogo');
   const [isAdm, setIsAdm] = useState(false);
-  const [logged, setLogin] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token') || false;
     const role = localStorage.getItem('role') || false;
-    if (token) setLogin(true);
-
     setIsAdm(role === 'admin');
   }, []);
 
   return (
     <>
-      <Header page={2} logged={logged} setLogin={setLogin} />
       <section>
         <div>
           <GamerFilter

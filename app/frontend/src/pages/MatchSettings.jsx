@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CreateNewGame from '../components/CreateNewGame';
 import EditGame from '../components/EditGame';
-import Header from '../components/Header';
 import Loading from '../components/Loading';
 import api, { requestData, setToken } from '../services/requests';
 
@@ -87,11 +86,6 @@ const MatchSettings = () => {
     } = location.state;
     return (
       <>
-        <Header
-          page={2}
-          logged={isAuthenticated}
-          setLogin={setIsAuthenticated}
-        />
         <EditGame
           homeTeam={[homeTeamState]}
           awayTeam={[awayTeamState]}
@@ -108,7 +102,6 @@ const MatchSettings = () => {
 
   return (
     <>
-      <Header page={2} logged={isAuthenticated} setLogin={setIsAuthenticated} />
       <CreateNewGame
         setHomeTeamScoreboard={setHomeTeamScoreboard}
         setAwayTeamScoreboard={setAwayTeamScoreboard}
