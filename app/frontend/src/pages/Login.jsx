@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { requestLogin, setToken, requestData } from '../services/requests';
 import { positiveLogo } from '../images';
+import Header from '../components/Header';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -37,6 +38,7 @@ const Login = () => {
 
   return (
     <>
+      <Header />
       <section className='flex flex-col items-center space-y-10 mt-10'>
         <img
           className='h-56'

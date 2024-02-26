@@ -14,8 +14,8 @@ function App() {
         <Route path='matches/settings' element={<MatchSettings />} />
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/matches' element={<Games />} />
-        <Route path='/login' element={<Login />} />
       </Route>
+      <Route path='/login' element={<Login />} />
     </Routes>
   );
 }
