@@ -7,7 +7,10 @@ import Header from '../components/Header';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(
+    localStorage.getItem('token') ? true : false
+  );
+
   const [failedTryLogin, setFailedTryLogin] = useState(false);
 
   const login = async (event) => {
