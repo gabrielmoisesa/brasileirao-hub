@@ -60,9 +60,6 @@ const Header = ({
 };
 
 Header.propTypes = {
-  logged: PropTypes.bool,
-  setLogin: PropTypes.func,
-  page: PropTypes.number,
   FirstNavLink: PropTypes.elementType,
   SecondNavLink: PropTypes.elementType,
   ThirdNavLink: PropTypes.elementType,
