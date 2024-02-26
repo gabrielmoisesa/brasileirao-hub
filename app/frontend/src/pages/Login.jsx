@@ -45,7 +45,7 @@ const Login = () => {
           src={positiveLogo}
           alt='Brasileirao Positive Logo'
         />
-        <form className='flex flex-col text-center space-y-5'>
+        <form className='flex flex-col items-center text-center space-y-5'>
           <h1 className='text-2xl'>Área do usuário</h1>
           <label htmlFor='email-input'>
             <input
@@ -72,7 +72,7 @@ const Login = () => {
             </p>
           ) : null}
           <button
-            className='bg-blue-600 text-white h-10 rounded-md'
+            className='bg-blue-600 text-white h-10 w-48 rounded-md'
             type='submit'
             onClick={(event) => login(event)}
           >
