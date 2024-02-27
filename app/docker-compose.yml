@@ -8,6 +8,7 @@ services:
     working_dir: /app-frontend
     volumes:
       - ./frontend/src:/app-frontend/src
+      - ./frontend/tailwind.config.js:/app-frontend/tailwind.config.js
     healthcheck:
       test: [ "CMD", "lsof", "-t", "-i:3000" ]
       timeout: 10s

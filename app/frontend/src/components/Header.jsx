@@ -20,9 +20,9 @@ const Header = () => {
   };
 
   return (
-    <header className='flex items-center place-content-between h-24 px-10 bg-white'>
+    <header className='flex items-center place-content-between h-24 px-10 bg-blue-800 text-white'>
       <div className='flex items-center space-x-1'>
-        <span className='text-2xl'>Brasileirão Hub</span>
+        <span className='text-2xl font-bold'>Brasileirão Hub</span>
         <img
           src={positiveLogo}
           alt='Brasileirao Positive Logo'

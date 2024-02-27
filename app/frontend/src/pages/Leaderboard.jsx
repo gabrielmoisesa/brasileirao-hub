@@ -7,7 +7,7 @@ const Leaderboard = () => {
 
   return (
     <>
-      <div className='flex flex-col my-10 items-center'>
+      <div>
         <TableFilter
           currentFilter={currentFilter}
           setCurrentFilter={setCurrentFilter}

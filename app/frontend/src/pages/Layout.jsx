@@ -4,13 +4,15 @@ import NavBar from '../components/NavBar';
 
 const Layout = () => {
   return (
-    <div>
+    <>
       <Header />
-      <NavBar />
-      <main>
-        <Outlet />
-      </main>
-    </div>
+      <div className='flex'>
+        <NavBar />
+        <main className='flex flex-col w-full items-center'>
+          <Outlet />
+        </main>
+      </div>
+    </>
   );
 };
 
