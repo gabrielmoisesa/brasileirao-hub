@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { exitToAppImg, positiveLogo } from '../images';
-import LoginBtn from './LoginBtn';
+import NavBtn from './NavBtn';
 import { useEffect, useState } from 'react';
 
 const Header = () => {
@@ -36,7 +36,7 @@ const Header = () => {
             <img src={exitToAppImg} alt='Sair do aplicativo' />
           </button>
         ) : (
-          <LoginBtn />
+          <NavBtn link='/login' text='Login' />
         )}
       </div>
     </header>
