@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: white;
+  --bg-color: rgb(240, 240, 240);
 }
 
 input::-webkit-outer-spin-button,

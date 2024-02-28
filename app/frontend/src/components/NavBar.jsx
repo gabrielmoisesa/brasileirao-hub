@@ -12,8 +12,8 @@ const NavBar = () => {
   ];
 
   return (
-    <nav className='h-screen w-1/6 pt-4 pl-4 bg-gray-100 border'>
-      <ul className='space-y-1'>
+    <nav className='h-screen w-1/6 pt-4 pl-4 bg-white'>
+      <ul className='space-y-1 lg:text-lg'>
         {routes.map((route, index) => (
           <li key={index}>
             <NavBtn
