@@ -8,7 +8,7 @@ const Layout = () => {
       <Header />
       <div className='md:flex'>
         <NavBar />
-        <main className='flex flex-col items-center w-full'>
+        <main className='w-full p-10'>
           <Outlet />
         </main>
       </div>

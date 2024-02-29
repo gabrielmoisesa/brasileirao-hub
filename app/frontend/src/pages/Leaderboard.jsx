@@ -7,7 +7,8 @@ const Leaderboard = () => {
 
   return (
     <>
-      <div>
+      <div className='mb-5 space-y-5 md:flex md:flex-col md:items-center'>
+        <h1 className='text-3xl'>Tabela</h1>
         <TableFilter
           currentFilter={currentFilter}
           setCurrentFilter={setCurrentFilter}

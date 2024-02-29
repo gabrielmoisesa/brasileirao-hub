@@ -42,7 +42,7 @@ const LeaderboardTable = ({ currentFilter }) => {
   }
 
   return (
-    <section>
+    <section className='md:flex md:justify-center'>
       <table>
         <thead>
           <tr>
@@ -77,37 +77,37 @@ const LeaderboardTable = ({ currentFilter }) => {
               index
             ) => (
               <tr key={uuidv4()}>
-                <td className='bg-blue-900 text-white text-center border border-black w-16 h-12'>
+                <td className='w-16 h-12 text-center text-white bg-blue-900 border border-black'>
                   {`${index + 1}`}
                 </td>
-                <td className='bg-blue-800 text-white text-center border border-black w-16'>
+                <td className='w-16 text-center text-white bg-blue-800 border border-black'>
                   {name}
                 </td>
-                <td className='bg-gray-100 text-center border border-black w-16'>
+                <td className='w-16 text-center bg-gray-100 border border-black'>
                   {totalPoints}
                 </td>
-                <td className='bg-gray-200 text-center border border-black w-16'>
+                <td className='w-16 text-center bg-gray-200 border border-black'>
                   {totalGames}
                 </td>
-                <td className='bg-gray-100 text-center border border-black w-16'>
+                <td className='w-16 text-center bg-gray-100 border border-black'>
                   {totalVictories}
                 </td>
-                <td className='bg-gray-200 text-center border border-black w-16'>
+                <td className='w-16 text-center bg-gray-200 border border-black'>
                   {totalDraws}
                 </td>
-                <td className='bg-gray-100 text-center border border-black w-16'>
+                <td className='w-16 text-center bg-gray-100 border border-black'>
                   {totalLosses}
                 </td>
-                <td className='bg-gray-200 text-center border border-black w-16'>
+                <td className='w-16 text-center bg-gray-200 border border-black'>
                   {goalsFavor}
                 </td>
-                <td className='bg-gray-100 text-center border border-black w-16'>
+                <td className='w-16 text-center bg-gray-100 border border-black'>
                   {goalsOwn}
                 </td>
-                <td className='bg-gray-200 text-center border border-black w-16'>
+                <td className='w-16 text-center bg-gray-200 border border-black'>
                   {goalsBalance}
                 </td>
-                <td className='bg-gray-100 text-center border border-black w-16'>
+                <td className='w-16 text-center bg-gray-100 border border-black'>
                   {efficiency}
                 </td>
               </tr>
