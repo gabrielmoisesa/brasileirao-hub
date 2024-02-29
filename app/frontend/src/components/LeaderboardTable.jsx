@@ -43,20 +43,15 @@ const LeaderboardTable = ({ currentFilter }) => {
 
   return (
     <section className='md:flex md:justify-center'>
-      <table>
-        <thead>
+      <table className='border table-auto'>
+        <thead className='bg-gray-100 border-b'>
           <tr>
-            <th>Classificação</th>
-            <th>Time</th>
-            <th>P</th>
-            <th>J</th>
-            <th>V</th>
-            <th>E</th>
-            <th>D</th>
-            <th>GP</th>
-            <th>GC</th>
-            <th>SG</th>
-            <th>%</th>
+            <th className='p-3 font-semibold text-start'>Posição</th>
+            {['PTS', 'J', 'V', 'E', 'D', 'GP', 'GC', 'SG', '%'].map((item) => (
+              <th key={uuidv4()} className='w-10 font-semibold'>
+                {item}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -76,40 +71,26 @@ const LeaderboardTable = ({ currentFilter }) => {
               },
               index
             ) => (
-              <tr key={uuidv4()}>
-                <td className='w-16 h-12 text-center text-white bg-blue-900 border border-black'>
-                  {`${index + 1}`}
+              <tr key={uuidv4()} className='bg-white border-b'>
+                <td className='p-3'>
+                  {`${index + 1}º`}
+                  <span className='ml-4'>{name}</span>
                 </td>
-                <td className='w-16 text-center text-white bg-blue-800 border border-black'>
-                  {name}
-                </td>
-                <td className='w-16 text-center bg-gray-100 border border-black'>
-                  {totalPoints}
-                </td>
-                <td className='w-16 text-center bg-gray-200 border border-black'>
-                  {totalGames}
-                </td>
-                <td className='w-16 text-center bg-gray-100 border border-black'>
-                  {totalVictories}
-                </td>
-                <td className='w-16 text-center bg-gray-200 border border-black'>
-                  {totalDraws}
-                </td>
-                <td className='w-16 text-center bg-gray-100 border border-black'>
-                  {totalLosses}
-                </td>
-                <td className='w-16 text-center bg-gray-200 border border-black'>
-                  {goalsFavor}
-                </td>
-                <td className='w-16 text-center bg-gray-100 border border-black'>
-                  {goalsOwn}
-                </td>
-                <td className='w-16 text-center bg-gray-200 border border-black'>
-                  {goalsBalance}
-                </td>
-                <td className='w-16 text-center bg-gray-100 border border-black'>
-                  {efficiency}
-                </td>
+                <td className='font-bold text-center'>{totalPoints}</td>
+                {[
+                  totalGames,
+                  totalVictories,
+                  totalDraws,
+                  totalLosses,
+                  goalsFavor,
+                  goalsOwn,
+                  goalsBalance,
+                ].map((item) => (
+                  <td key={uuidv4()} className='w-10 text-center'>
+                    {item}
+                  </td>
+                ))}
+                <td className='px-3'>{efficiency}</td>
               </tr>
             )
           )}
