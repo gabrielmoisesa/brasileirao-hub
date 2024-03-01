@@ -18,16 +18,23 @@ export default class ResultsCalculator {
 
   public static getLatestMatchResults(teamId: number, teamMatches: IMatch[]): MatchResult[] {
     const latestMatches = teamMatches.slice(0, 3);
-    const latestMatchesResults = latestMatches.map((match) => {
-      if (match.homeTeamId === teamId) {
-        // eslint-disable-next-line max-len, no-nested-ternary
-        return match.homeTeamGoals > match.awayTeamGoals ? 'V' : match.homeTeamGoals === match.awayTeamGoals ? 'E' : 'D';
-      }
-      // eslint-disable-next-line max-len, no-nested-ternary
-      return match.awayTeamGoals > match.homeTeamGoals ? 'V' : match.homeTeamGoals === match.awayTeamGoals ? 'E' : 'D';
-    });
+
+    const latestMatchesResults = latestMatches.map((match) =>
+      ResultsCalculator.getMatchResult(teamId, match));
+
     return latestMatchesResults;
   }
+
+  private static getMatchResult = (teamId: number, match: IMatch): MatchResult => {
+    const result = ResultsCalculator.getTotalGVDL(teamId, [match]);
+    if (result.totalVictories > 0) {
+      return 'V';
+    }
+    if (result.totalDraws > 0) {
+      return 'E';
+    }
+    return 'D';
+  };
 
   private static getTotalGVDL(
     teamId: number,
