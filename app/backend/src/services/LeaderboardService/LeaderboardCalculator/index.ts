@@ -19,12 +19,14 @@ export default class LeaderboardCalculator {
     const goalsStats = GoalsStatsCalculator.getGoalsStats(team.id, teamMatches);
     const efficiency = LeaderboardCalculator
       .calculateEfficiency(totalMatchesResults.totalPoints, totalMatchesResults.totalGames);
+    const latestMatchResults = ResultsCalculator.getLatestMatchResults(team.id, teamMatches);
 
     return {
       name: team.teamName,
       ...totalMatchesResults,
       ...goalsStats,
       efficiency,
+      latestMatchResults,
     };
   }
 

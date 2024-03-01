@@ -1,4 +1,4 @@
-import { ILeaderboard } from '../../../Interfaces/leaderboard/ILeaderboard';
+import { ILeaderboard, MatchResult } from '../../../Interfaces/leaderboard/ILeaderboard';
 import { IMatch } from '../../../Interfaces/matches/IMatch';
 
 export default class ResultsCalculator {
@@ -14,6 +14,19 @@ export default class ResultsCalculator {
       totalGVDL.totalDraws,
     );
     return { totalPoints, ...totalGVDL };
+  }
+
+  public static getLatestMatchResults(teamId: number, teamMatches: IMatch[]): MatchResult[] {
+    const latestMatches = teamMatches.slice(0, 3);
+    const latestMatchesResults = latestMatches.map((match) => {
+      if (match.homeTeamId === teamId) {
+        // eslint-disable-next-line max-len, no-nested-ternary
+        return match.homeTeamGoals > match.awayTeamGoals ? 'V' : match.homeTeamGoals === match.awayTeamGoals ? 'E' : 'D';
+      }
+      // eslint-disable-next-line max-len, no-nested-ternary
+      return match.awayTeamGoals > match.homeTeamGoals ? 'V' : match.homeTeamGoals === match.awayTeamGoals ? 'E' : 'D';
+    });
+    return latestMatchesResults;
   }
 
   private static getTotalGVDL(

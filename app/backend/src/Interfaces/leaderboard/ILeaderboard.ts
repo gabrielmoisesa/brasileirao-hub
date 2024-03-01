@@ -1,3 +1,5 @@
+export type MatchResult = 'V' | 'D' | 'E';
+
 export interface ILeaderboard {
   name: string;
   totalPoints: number;
@@ -8,5 +10,6 @@ export interface ILeaderboard {
   goalsFavor: number;
   goalsOwn: number;
   goalsBalance: number;
-  efficiency: string;
+  efficiency: string
+  latestMatchResults: MatchResult[]
 }
