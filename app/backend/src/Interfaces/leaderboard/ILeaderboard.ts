@@ -11,5 +11,5 @@ export interface ILeaderboard {
   goalsOwn: number;
   goalsBalance: number;
   efficiency: string
-  latestMatchResults: MatchResult[]
+  latestResults: MatchResult[]
 }

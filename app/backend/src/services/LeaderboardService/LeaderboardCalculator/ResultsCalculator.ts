@@ -16,7 +16,7 @@ export default class ResultsCalculator {
     return { totalPoints, ...totalGVDL };
   }
 
-  public static getLatestMatchResults(teamId: number, teamMatches: IMatch[]): MatchResult[] {
+  public static getLatestResults(teamId: number, teamMatches: IMatch[]): MatchResult[] {
     const latestMatches = teamMatches.slice(0, 3);
 
     const latestMatchesResults = latestMatches.map((match) =>
