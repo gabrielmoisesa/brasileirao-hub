@@ -41,6 +41,17 @@ const LeaderboardTable = ({ currentFilter }) => {
     return <Loading />;
   }
 
+  const getResultBg = (result) => {
+    switch (result) {
+      case 'V':
+        return 'bg-green-400';
+      case 'D':
+        return 'bg-red-400';
+      default:
+        return 'bg-gray-400';
+    }
+  };
+
   return (
     <section className='md:flex md:justify-center'>
       <table className='border table-auto'>
@@ -52,6 +63,7 @@ const LeaderboardTable = ({ currentFilter }) => {
                 {item}
               </th>
             ))}
+            <th className='p-3 font-semibold'>Recentes</th>
           </tr>
         </thead>
         <tbody>
@@ -68,6 +80,7 @@ const LeaderboardTable = ({ currentFilter }) => {
                 goalsOwn,
                 goalsBalance,
                 efficiency,
+                latestResults,
               },
               index
             ) => (
@@ -90,7 +103,10 @@ const LeaderboardTable = ({ currentFilter }) => {
                     {item}
                   </td>
                 ))}
-                <td className='px-3'>{efficiency}</td>
+                <td className='px-2'>{efficiency}</td>
+                <td className='space-x-2 text-center'>{latestResults.map((result) => (
+                  <span key={uuidv4()} className={`${getResultBg(result)} rounded-lg text-xs px-1 text-white`}>{result}</span>
+                ))}</td>
               </tr>
             )
           )}
