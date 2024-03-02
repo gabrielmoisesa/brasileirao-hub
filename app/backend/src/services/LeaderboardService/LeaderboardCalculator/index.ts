@@ -62,6 +62,7 @@ export default class LeaderboardCalculator {
   }
 
   private static calculateEfficiency(totalPoints: number, totalGames: number): string {
+    if (totalPoints === 0 || totalGames === 0) return '0.00';
     return ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
   }
 }
