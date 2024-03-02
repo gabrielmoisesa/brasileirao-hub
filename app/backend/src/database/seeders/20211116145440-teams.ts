@@ -12,6 +12,7 @@ export default {
         { team_name: "Botafogo", image_url: "" },
         { team_name: "Corinthians", image_url: "" },
         { team_name: "Coritiba", image_url: "" },
+        { team_name: "Cruzeiro", image_url: "" },
         { team_name: "Cuiabá", image_url: "" },
         { team_name: "Flamengo", image_url: "" },
         { team_name: "Fluminense", image_url: "" },
