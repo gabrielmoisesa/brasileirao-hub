@@ -23,6 +23,7 @@ export default class MatchModel implements IMatchModel {
           attributes: ['teamName'],
         },
       ],
+      order: [['id', 'DESC']],
     });
 
     return matches;
