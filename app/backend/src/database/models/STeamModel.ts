@@ -13,6 +13,7 @@ InferCreationAttributes<STeamModel>
 > {
   declare id: CreationOptional<number>;
   declare teamName: string;
+  declare imageUrl: string;
 }
 
 STeamModel.init({
@@ -26,6 +27,11 @@ STeamModel.init({
     type: DataTypes.STRING,
     allowNull: false,
     field: 'team_name',
+  },
+  imageUrl: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: 'image_url',
   },
 }, {
   sequelize: db,

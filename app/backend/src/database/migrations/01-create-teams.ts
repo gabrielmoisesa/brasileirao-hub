@@ -15,6 +15,11 @@ export default {
         allowNull: false,
         field: 'team_name',
       },
+      imageUrl: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'image_url',
+      },
     });
   },
 
