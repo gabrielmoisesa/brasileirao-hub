@@ -1,21 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { requestData } from '../services/requests';
 import Loading from './Loading';
 import { v4 as uuidv4 } from 'uuid';
+import GlobalContext from '../context/GlobalContext';
 
 const LeaderboardTable = ({ currentFilter }) => {
   const [leaderboard, setLeaderboard] = useState([]);
-  const [teams, setTeams] = useState([]);
+  const { teams } = useContext(GlobalContext);
 
   const getLeaderboard = (endpoint) =>
     requestData(endpoint)
       .then((response) => setLeaderboard(response))
-      .catch((error) => console.log(error));
-
-  const getTeams = (endpoint) =>
-    requestData(endpoint)
-      .then((response) => setTeams(response))
       .catch((error) => console.log(error));
 
   useEffect(() => {
@@ -33,8 +29,6 @@ const LeaderboardTable = ({ currentFilter }) => {
         getLeaderboard(apiLeaderboard);
         break;
     }
-    const apiTeams = '/teams';
-    getTeams(apiTeams);
   }, [currentFilter]);
 
   useEffect(() => {
