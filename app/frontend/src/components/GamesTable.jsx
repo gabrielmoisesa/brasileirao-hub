@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { requestData } from '../services/requests';
 import Loading from './Loading';
@@ -108,11 +107,6 @@ const GamesTable = ({ currentFilter, isAdm }) => {
       </tbody>
     </table>
   );
-};
-
-GamesTable.propTypes = {
-  currentFilter: PropTypes.string.isRequired,
-  isAdm: PropTypes.bool.isRequired,
 };
 
 export default GamesTable;

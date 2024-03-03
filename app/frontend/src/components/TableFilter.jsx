@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
   const handleCurrentFilter = () => {
     const selectedFilter = document.getElementById(
@@ -32,10 +30,5 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
     </form>
   );
 };
-
-GamerFilter.propTypes = {
-  currentFilter: PropTypes.string,
-  setCurrentFilter: PropTypes.func,
-}.isRequired;
 
 export default GamerFilter;

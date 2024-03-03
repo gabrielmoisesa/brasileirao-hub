@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
   const handleCurrentFilter = () => {
     const selectedFilter = document.getElementById('game-filter').value;
@@ -17,7 +15,7 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
         </select>
       </label>
       <button
-        className='border bg-blue-600 hover:bg-blue-800 text-white rounded-md h-10 w-40 disabled:hover:cursor-not-allowed'
+        className='w-40 h-10 text-white bg-blue-600 border rounded-md hover:bg-blue-800 disabled:hover:cursor-not-allowed'
         type='button'
         onClick={() => handleCurrentFilter()}
       >
@@ -26,10 +24,5 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
     </form>
   );
 };
-
-GamerFilter.propTypes = {
-  currentFilter: PropTypes.string,
-  setCurrentFilter: PropTypes.func,
-}.isRequired;
 
 export default GamerFilter;

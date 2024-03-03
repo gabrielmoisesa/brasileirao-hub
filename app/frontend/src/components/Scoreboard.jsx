@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const Scoreboard = ({ homeTeam, score, setScore, qtyGoal }) => (
   <label
     className='text-center'
@@ -7,7 +5,7 @@ const Scoreboard = ({ homeTeam, score, setScore, qtyGoal }) => (
   >
     <p>Gols</p>
     <input
-      className='border-gray-300 border rounded-md text-center w-20'
+      className='w-20 text-center border border-gray-300 rounded-md'
       type='number'
       min='0'
       value={score}
@@ -21,17 +19,5 @@ const Scoreboard = ({ homeTeam, score, setScore, qtyGoal }) => (
     />
   </label>
 );
-
-Scoreboard.propTypes = {
-  homeTeam: PropTypes.bool.isRequired,
-  score: PropTypes.number,
-  setScore: PropTypes.func.isRequired,
-  qtyGoal: PropTypes.string,
-};
-
-Scoreboard.defaultProps = {
-  score: undefined,
-  qtyGoal: undefined,
-};
 
 export default Scoreboard;

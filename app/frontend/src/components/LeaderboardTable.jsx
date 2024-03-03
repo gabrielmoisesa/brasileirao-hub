@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
 import { requestData } from '../services/requests';
 import Loading from './Loading';
 import { v4 as uuidv4 } from 'uuid';
@@ -135,10 +134,6 @@ const LeaderboardTable = ({ currentFilter }) => {
       </table>
     </section>
   );
-};
-
-LeaderboardTable.propTypes = {
-  currentFilter: PropTypes.string.isRequired,
 };
 
 export default LeaderboardTable;

@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
-
 import TeamOption from './TeamOption';
 import Scoreboard from './Scoreboard';
 
@@ -18,7 +16,7 @@ const EditGame = ({
   const [currentAwayTeamGoals, setAwayTeamGoals] = useState(awayTeamGoals);
   return (
     <section className='flex justify-center m-40'>
-      <form className='flex-col bg-white shadow-lg h-96 px-32 py-16 space-y-10'>
+      <form className='flex-col px-32 py-16 space-y-10 bg-white shadow-lg h-96'>
         <div className='flex items-center'>
           <TeamOption teams={homeTeam} homeTeam getTeam={getTeam} />
           <Scoreboard
@@ -40,7 +38,7 @@ const EditGame = ({
         </div>
         <div className='flex justify-center space-x-6'>
           <button
-            className='border bg-blue-600 hover:bg-blue-800 text-white rounded-md h-10 w-40 disabled:hover:cursor-not-allowed'
+            className='w-40 h-10 text-white bg-blue-600 border rounded-md hover:bg-blue-800 disabled:hover:cursor-not-allowed'
             onClick={() =>
               updateMatch(idMatch, {
                 homeTeamGoals: currentHomeTeamGoals,
@@ -52,7 +50,7 @@ const EditGame = ({
             Editar
           </button>
           <button
-            className='border border-blue-600 rounded-md h-10 w-40 disabled:hover:cursor-not-allowed'
+            className='w-40 h-10 border border-blue-600 rounded-md disabled:hover:cursor-not-allowed'
             onClick={() => finishMatch(idMatch)}
             type='button'
           >
@@ -63,16 +61,5 @@ const EditGame = ({
     </section>
   );
 };
-
-EditGame.propTypes = {
-  homeTeam: PropTypes.any,
-  awayTeam: PropTypes.any,
-  homeTeamGoals: PropTypes.any,
-  awayTeamGoals: PropTypes.any,
-  idMatch: PropTypes.any,
-  getTeam: PropTypes.any,
-  finishMatc: PropTypes.any,
-  updateMatch: PropTypes.any,
-}.isRequired;
 
 export default EditGame;

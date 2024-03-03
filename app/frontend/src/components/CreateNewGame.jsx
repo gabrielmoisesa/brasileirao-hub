@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import TeamOption from './TeamOption';
 import Scoreboard from './Scoreboard';
@@ -21,7 +20,7 @@ const CreateNewGame = ({
 
   return (
     <section className='flex justify-center m-40'>
-      <form className='flex-col bg-white shadow-lg h-96 px-32 py-16 space-y-10'>
+      <form className='flex-col px-32 py-16 space-y-10 bg-white shadow-lg h-96'>
         <div className='flex items-center'>
           <TeamOption
             teams={teams}
@@ -51,7 +50,7 @@ const CreateNewGame = ({
         </div>
         <div className='flex justify-center space-x-6'>
           <button
-            className='border bg-blue-600 hover:bg-blue-800 text-white rounded-md h-10 w-40 disabled:hover:cursor-not-allowed'
+            className='w-40 h-10 text-white bg-blue-600 border rounded-md hover:bg-blue-800 disabled:hover:cursor-not-allowed'
             onClick={async () => {
               const body = await createMatch();
               setCreatedMatch(body);
@@ -63,7 +62,7 @@ const CreateNewGame = ({
             Salvar Partida
           </button>
           <button
-            className='border border-blue-600 rounded-md h-10 w-40 disabled:hover:cursor-not-allowed'
+            className='w-40 h-10 border border-blue-600 rounded-md disabled:hover:cursor-not-allowed'
             onClick={() => {
               finishMatch(createdMatch.id);
             }}
@@ -77,15 +76,5 @@ const CreateNewGame = ({
     </section>
   );
 };
-
-CreateNewGame.propTypes = {
-  teams: PropTypes.arrayOf(PropTypes.object),
-  setTeams: PropTypes.func,
-  getTeam: PropTypes.func,
-  homeTeamScoreboard: PropTypes.string,
-  setHomeTeamScoreboard: PropTypes.func,
-  awayTeamScoreboard: PropTypes.string,
-  setAwayTeamScoreboard: PropTypes.func,
-}.isRequired;
 
 export default CreateNewGame;
