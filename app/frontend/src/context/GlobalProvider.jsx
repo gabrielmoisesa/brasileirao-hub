@@ -1,22 +1,12 @@
-import { useEffect, useState } from 'react';
-import { requestData } from '../services/requests';
 import GlobalContext from './GlobalContext';
+import { useFetch } from '../services/useFetch';
 
 const GlobalProvider = ({ children }) => {
-  const [teams, setTeams] = useState([]);
-
-  const getTeams = (endpoint) =>
-    requestData(endpoint)
-      .then((response) => setTeams(response))
-      .catch((error) => console.log(error));
-
-  useEffect(() => {
-    const apiTeams = '/teams';
-    getTeams(apiTeams);
-  }, []);
+  const { data: teams, isPending } = useFetch('/teams');
 
   const contextValue = {
     teams,
+    isPending,
   };
 
   return (

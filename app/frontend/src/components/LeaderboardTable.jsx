@@ -6,7 +6,7 @@ import GlobalContext from '../context/GlobalContext';
 
 const LeaderboardTable = ({ currentFilter }) => {
   const [leaderboard, setLeaderboard] = useState([]);
-  const { teams } = useContext(GlobalContext);
+  const { teams, isPending } = useContext(GlobalContext);
 
   const getLeaderboard = (endpoint) =>
     requestData(endpoint)
@@ -38,11 +38,12 @@ const LeaderboardTable = ({ currentFilter }) => {
     }
   }, [leaderboard]);
 
-  if (!leaderboard.length) {
+  if (isPending || !leaderboard.length) {
     return <Loading />;
   }
 
   const getTeamLogo = (teamName) => {
+    if (!teams) return undefined;
     const team = teams.find((team) => team.teamName === teamName);
     return team.imageUrl;
   };
