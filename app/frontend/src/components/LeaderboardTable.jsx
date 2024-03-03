@@ -98,10 +98,14 @@ const LeaderboardTable = ({ currentFilter }) => {
               index
             ) => (
               <tr key={uuidv4()} className='bg-white border-b'>
-                <td className='p-3'>
-                  <span>{`${index + 1}º`}</span>
-                  <img src={getTeamLogo(name)} alt={`${name} Logo`} />
-                  <span className='ml-4'>{name}</span>
+                <td className='flex p-3'>
+                  <span className='w-7'>{`${index + 1}º`}</span>
+                  <img
+                    src={getTeamLogo(name)}
+                    alt={`${name} Logo`}
+                    className='h-8 ml-1 mr-3'
+                  />
+                  <span>{name}</span>
                 </td>
                 <td className='font-bold text-center'>{totalPoints}</td>
                 {[
