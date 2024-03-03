@@ -6,10 +6,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 const LeaderboardTable = ({ currentFilter }) => {
   const [leaderboard, setLeaderboard] = useState([]);
+  const [teams, setTeams] = useState([]);
 
   const getLeaderboard = (endpoint) =>
     requestData(endpoint)
       .then((response) => setLeaderboard(response))
+      .catch((error) => console.log(error));
+
+  const getTeams = (endpoint) =>
+    requestData(endpoint)
+      .then((response) => setTeams(response))
       .catch((error) => console.log(error));
 
   useEffect(() => {
@@ -27,6 +33,8 @@ const LeaderboardTable = ({ currentFilter }) => {
         getLeaderboard(apiLeaderboard);
         break;
     }
+    const apiTeams = '/teams';
+    getTeams(apiTeams);
   }, [currentFilter]);
 
   useEffect(() => {
@@ -40,6 +48,11 @@ const LeaderboardTable = ({ currentFilter }) => {
   if (!leaderboard.length) {
     return <Loading />;
   }
+
+  const getTeamLogo = (teamName) => {
+    const team = teams.find((team) => team.teamName === teamName);
+    return team.imageUrl;
+  };
 
   const getResultBg = (result) => {
     switch (result) {
@@ -86,7 +99,8 @@ const LeaderboardTable = ({ currentFilter }) => {
             ) => (
               <tr key={uuidv4()} className='bg-white border-b'>
                 <td className='p-3'>
-                  {`${index + 1}º`}
+                  <span>{`${index + 1}º`}</span>
+                  <img src={getTeamLogo(name)} alt={`${name} Logo`} />
                   <span className='ml-4'>{name}</span>
                 </td>
                 <td className='font-bold text-center'>{totalPoints}</td>
@@ -104,9 +118,18 @@ const LeaderboardTable = ({ currentFilter }) => {
                   </td>
                 ))}
                 <td className='px-2'>{efficiency}</td>
-                <td className='space-x-2 text-center'>{latestResults.map((result) => (
-                  <span key={uuidv4()} className={`${getResultBg(result)} rounded-lg text-xs px-1 text-white`}>{result}</span>
-                ))}</td>
+                <td className='space-x-2 text-center'>
+                  {latestResults.map((result) => (
+                    <span
+                      key={uuidv4()}
+                      className={`${getResultBg(
+                        result
+                      )} rounded-lg text-xs px-1 text-white`}
+                    >
+                      {result}
+                    </span>
+                  ))}
+                </td>
               </tr>
             )
           )}
