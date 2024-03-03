@@ -1,44 +1,22 @@
-import { useState, useEffect, useContext } from 'react';
-import { requestData } from '../services/requests';
+import { useContext } from 'react';
 import Loading from './Loading';
 import { v4 as uuidv4 } from 'uuid';
 import GlobalContext from '../context/GlobalContext';
+import { useFetch } from '../services/useFetch';
 
 const LeaderboardTable = ({ currentFilter }) => {
-  const [leaderboard, setLeaderboard] = useState([]);
-  const { teams, isPending } = useContext(GlobalContext);
+  const leaderboardUrl = `/leaderboard${
+    currentFilter === 'Classificação Mandantes'
+      ? '/home'
+      : currentFilter === 'Classificação Visitantes'
+      ? '/away'
+      : ''
+  }`;
 
-  const getLeaderboard = (endpoint) =>
-    requestData(endpoint)
-      .then((response) => setLeaderboard(response))
-      .catch((error) => console.log(error));
+  const leaderboard = useFetch(leaderboardUrl);
+  const { teams } = useContext(GlobalContext);
 
-  useEffect(() => {
-    const apiLeaderboard = '/leaderboard';
-    const apiLeaderboardHome = '/leaderboard/home';
-    const apiLeaderboardAway = '/leaderboard/away';
-    switch (currentFilter) {
-      case 'Classificação Mandantes':
-        getLeaderboard(apiLeaderboardHome);
-        break;
-      case 'Classificação Visitantes':
-        getLeaderboard(apiLeaderboardAway);
-        break;
-      default:
-        getLeaderboard(apiLeaderboard);
-        break;
-    }
-  }, [currentFilter]);
-
-  useEffect(() => {
-    const endpoint = '/leaderboard';
-
-    if (leaderboard.length === 0) {
-      getLeaderboard(endpoint);
-    }
-  }, [leaderboard]);
-
-  if (isPending || !leaderboard.length) {
+  if (!leaderboard || !teams) {
     return <Loading />;
   }
 

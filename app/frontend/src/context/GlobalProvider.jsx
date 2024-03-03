@@ -2,11 +2,10 @@ import GlobalContext from './GlobalContext';
 import { useFetch } from '../services/useFetch';
 
 const GlobalProvider = ({ children }) => {
-  const { data: teams, isPending } = useFetch('/teams');
+  const teams = useFetch('/teams');
 
   const contextValue = {
     teams,
-    isPending,
   };
 
   return (
