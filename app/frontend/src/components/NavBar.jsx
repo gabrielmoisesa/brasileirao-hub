@@ -19,7 +19,7 @@ const NavBar = () => {
             <NavBtn
               link={route.link}
               text={route.text}
-              className={route.link === currPath && 'text-blue-700'}
+              className={route.link === currPath ? 'text-blue-700' : undefined}
             />
           </li>
         ))}
