@@ -14,7 +14,7 @@ const GlobalProvider = ({ children }) => {
   useEffect(() => {
     const apiTeams = '/teams';
     getTeams(apiTeams);
-  });
+  }, []);
 
   const contextValue = {
     teams,
