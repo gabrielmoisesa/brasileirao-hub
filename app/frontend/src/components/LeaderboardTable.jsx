@@ -39,16 +39,24 @@ const LeaderboardTable = ({ currentFilter }) => {
 
   return (
     <section className='md:flex md:justify-center'>
-      <table className='border table-auto'>
+      <table className='w-full border table-auto md:w-fit'>
         <thead className='bg-gray-100 border-b'>
           <tr>
             <th className='p-3 font-semibold text-start'>Posição</th>
-            {['PTS', 'J', 'V', 'E', 'D', 'GP', 'GC', 'SG', '%'].map((item) => (
-              <th key={uuidv4()} className='w-10 font-semibold'>
+            {['PTS', 'J', 'V', 'E', 'D'].map((item) => (
+              <th key={uuidv4()} className={'w-10 font-semibold'}>
                 {item}
               </th>
             ))}
-            <th className='p-3 font-semibold'>Recentes</th>
+            {['GP', 'GC', 'SG', '%'].map((item) => (
+              <th
+                key={uuidv4()}
+                className={'w-10 font-semibold hidden md:table-cell'}
+              >
+                {item}
+              </th>
+            ))}
+            <th className='p-1 font-semibold sm-2:p-3'>Recentes</th>
           </tr>
         </thead>
         <tbody>
@@ -75,26 +83,28 @@ const LeaderboardTable = ({ currentFilter }) => {
                   <img
                     src={getTeamLogo(name)}
                     alt={`${name} Logo`}
-                    className='h-8 ml-1 mr-3'
+                    className='h-8 ml-0 mr-0 sm-2:mr-3 sm-2:ml-1'
                   />
-                  <span>{name}</span>
+                  <span className='hidden sm-2:block'>{name}</span>
                 </td>
                 <td className='font-bold text-center'>{totalPoints}</td>
-                {[
-                  totalGames,
-                  totalVictories,
-                  totalDraws,
-                  totalLosses,
-                  goalsFavor,
-                  goalsOwn,
-                  goalsBalance,
-                ].map((item) => (
-                  <td key={uuidv4()} className='w-10 text-center'>
+                {[totalGames, totalVictories, totalDraws, totalLosses].map(
+                  (item) => (
+                    <td key={uuidv4()} className='w-10 text-center'>
+                      {item}
+                    </td>
+                  )
+                )}
+                {[goalsFavor, goalsOwn, goalsBalance].map((item) => (
+                  <td
+                    key={uuidv4()}
+                    className='hidden w-10 text-center md:table-cell'
+                  >
                     {item}
                   </td>
                 ))}
-                <td className='px-2'>{efficiency}</td>
-                <td className='space-x-2 text-center'>
+                <td className='hidden px-2 md:table-cell'>{efficiency}</td>
+                <td className='space-x-1 text-center sm-2:space-x-2'>
                   {latestResults.map((result) => (
                     <span
                       key={uuidv4()}
