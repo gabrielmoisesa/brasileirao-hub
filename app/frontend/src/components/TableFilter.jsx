@@ -7,7 +7,7 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
   };
 
   return (
-    <form className='flex space-x-2'>
+    <form className='flex flex-col items-center sm-2:space-x-2 sm-2:flex-row'>
       <label className='text-lg' htmlFor='classification-filter'>
         Partidas:
         <select
