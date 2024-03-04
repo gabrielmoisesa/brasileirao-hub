@@ -7,11 +7,11 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
   };
 
   return (
-    <form className='flex items-center space-x-6'>
+    <form className='flex space-x-2'>
       <label className='text-lg' htmlFor='classification-filter'>
         Partidas:
         <select
-          className='h-8 ml-2 text-base bg-gray-100 border rounded-md border-gray-3'
+          className='h-8 ml-2 text-base bg-gray-100 border rounded-md w-44 border-gray-3'
           id='classification-filter'
           defaultValue={currentFilter}
         >
@@ -21,7 +21,7 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
         </select>
       </label>
       <button
-        className='w-40 h-10 text-white bg-blue-600 border rounded-md hover:bg-blue-800 disabled:hover:cursor-not-allowed'
+        className='w-24 h-8 text-white bg-blue-600 border rounded-md hover:bg-blue-800 disabled:hover:cursor-not-allowed'
         type='button'
         onClick={() => handleCurrentFilter()}
       >
