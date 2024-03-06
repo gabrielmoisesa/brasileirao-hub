@@ -78,7 +78,7 @@ const LeaderboardTable = ({ currentFilter }) => {
               index
             ) => (
               <tr key={uuidv4()} className='bg-white border-b'>
-                <td className='flex p-3'>
+                <td className='flex items-center p-3'>
                   <span className='w-7'>{`${index + 1}º`}</span>
                   <img
                     src={getTeamLogo(name)}
