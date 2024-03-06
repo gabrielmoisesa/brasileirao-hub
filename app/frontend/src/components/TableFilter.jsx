@@ -1,3 +1,5 @@
+import SelectBtn from './SelectBtn';
+
 const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
   const handleCurrentFilter = () => {
     const selectedFilter = document.getElementById(
@@ -20,13 +22,7 @@ const GamerFilter = ({ currentFilter, setCurrentFilter }) => {
           <option>Classificação Visitantes</option>
         </select>
       </label>
-      <button
-        className='w-24 h-8 text-white bg-blue-600 border rounded-md hover:bg-blue-800 disabled:hover:cursor-not-allowed'
-        type='button'
-        onClick={() => handleCurrentFilter()}
-      >
-        Buscar
-      </button>
+      <SelectBtn handleCurrentFilter={handleCurrentFilter} />
     </form>
   );
 };
