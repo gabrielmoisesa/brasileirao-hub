@@ -13,7 +13,7 @@ export default {
         {
           team_name: 'Athletico Paranaense',
           image_url:
-            'https://logodetimes.com/times/atletico-paranaense/logo-atletico-paranaense-256.png',
+            'https://logodetimes.com/times/atletico-paranaense/logo-atletico-paranaense-novo-escudo-256.png',
         },
         {
           team_name: 'Atlético Mineiro',
