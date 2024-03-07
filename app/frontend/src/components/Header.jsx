@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { exitToAppImg, positiveLogo } from '../images';
 import NavBtn from './NavBtn';
 import { useEffect, useState } from 'react';
@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 const Header = () => {
   const [logged, setLogin] = useState(false);
   const navigate = useNavigate();
+  const currPath = useLocation().pathname;
 
   useEffect(() => {
     const token = localStorage.getItem('token') || false;
@@ -35,6 +36,8 @@ const Header = () => {
             Sair
             <img src={exitToAppImg} alt='Sair do aplicativo' />
           </button>
+        ) : currPath === '/login' ? (
+          <NavBtn link='/' text='Home' />
         ) : (
           <NavBtn link='/login' text='Login' />
         )}
