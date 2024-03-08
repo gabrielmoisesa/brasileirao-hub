@@ -36,7 +36,13 @@ const GamesTable = ({ currentFilter, isAdm }) => {
               className='flex items-center w-9/12 p-4 bg-white border place-content-evenly md:max-w-lg'
             >
               <MatchTeamCard teamName={homeTeam.teamName} />
-              <div className='p-2 font-semibold bg-gray-100 rounded'>
+              <div className='p-2 text-lg font-semibold text-center bg-gray-100 rounded'>
+                {inProgress && (
+                  <div className='flex items-center space-x-1 text-xs'>
+                    <div className='w-2 h-2 bg-red-500 rounded-full'></div>
+                    <span>Ao vivo</span>
+                  </div>
+                )}
                 <span>{homeTeamGoals}</span>
                 <span className='font-bold'> - </span>
                 <span>{awayTeamGoals}</span>
