@@ -33,7 +33,7 @@ const GamesTable = ({ currentFilter, isAdm }) => {
           }) => (
             <div
               key={uuidv4()}
-              className='flex items-center w-9/12 p-4 bg-white border place-content-evenly'
+              className='flex items-center w-9/12 p-4 bg-white border place-content-evenly md:max-w-lg'
             >
               <MatchTeamCard teamName={homeTeam.teamName} />
               <div className='p-2 font-semibold bg-gray-100 rounded'>
