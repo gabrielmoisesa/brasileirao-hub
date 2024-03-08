@@ -14,17 +14,11 @@ const LeaderboardTable = ({ currentFilter }) => {
   }`;
 
   const leaderboard = useFetch(leaderboardUrl);
-  const { teams } = useContext(GlobalContext);
+  const { getTeamLogo } = useContext(GlobalContext);
 
-  if (!leaderboard || !teams) {
+  if (!leaderboard) {
     return <Loading />;
   }
-
-  const getTeamLogo = (teamName) => {
-    if (!teams) return undefined;
-    const team = teams.find((team) => team.teamName === teamName);
-    return team.imageUrl;
-  };
 
   const getResultBg = (result) => {
     switch (result) {

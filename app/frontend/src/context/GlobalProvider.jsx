@@ -4,8 +4,14 @@ import { useFetch } from '../services/useFetch';
 const GlobalProvider = ({ children }) => {
   const teams = useFetch('/teams');
 
+  const getTeamLogo = (teamName) => {
+    if (!teams) return undefined;
+    const team = teams.find((team) => team.teamName === teamName);
+    return team.imageUrl;
+  };
+
   const contextValue = {
-    teams,
+    getTeamLogo,
   };
 
   return (

@@ -15,7 +15,8 @@ const Games = () => {
   return (
     <>
       <section>
-        <div>
+        <div className='flex flex-col items-center px-10 pt-5 mb-5 space-y-5 md:pt-0 md:px-0'>
+          <h1 className='text-3xl'>Partidas</h1>
           <GamerFilter
             currentFilter={currentFilter}
             setCurrentFilter={setCurrentFilter}

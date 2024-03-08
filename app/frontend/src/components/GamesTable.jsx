@@ -1,111 +1,59 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { requestData } from '../services/requests';
 import Loading from './Loading';
 import { check, editIcon } from '../images';
+import { useFetch } from '../services/useFetch';
+import { v4 as uuidv4 } from 'uuid';
+import { useContext } from 'react';
+import GlobalContext from '../context/GlobalContext';
 
 const GamesTable = ({ currentFilter, isAdm }) => {
-  const [games, setGames] = useState([]);
+  const gamesUrl = `/matches${
+    currentFilter === 'Em andamento'
+      ? '?inProgress=true'
+      : currentFilter === 'Finalizado'
+      ? '?inProgress=false'
+      : ''
+  }`;
+
+  const games = useFetch(gamesUrl);
+  const { getTeamLogo } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
-  const getGames = (endpoint) =>
-    requestData(endpoint)
-      .then((response) => setGames(response))
-      .catch((error) => console.log(error));
-
-  useEffect(() => {
-    const endpoint = '/matches';
-
-    switch (currentFilter) {
-      case 'Em andamento':
-        getGames(`${endpoint}?inProgress=true`);
-        break;
-      case 'Finalizado':
-        getGames(`${endpoint}?inProgress=false`);
-        break;
-      default:
-        getGames(endpoint);
-        break;
-    }
-  }, [currentFilter]);
-
-  useEffect(() => {
-    const endpoint = '/matches';
-
-    if (!games.length) {
-      getGames(endpoint);
-    }
-  }, [games]);
-
-  if (!games.length) {
+  if (!games) {
     return <Loading />;
   }
 
   return (
-    <table className='flex flex-col items-center w-full'>
-      <thead className='m-2 bg-white shadow-md w-fit'>
-        <tr className='flex flex-rows'>
-          <th>Time Mandante</th>
-          <th>Gols</th>
-          <th>Gols</th>
-          <th>Time Visitante</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {games
-          .sort((a, b) => b.inProgress - a.inProgress)
-          .map(
-            ({
-              id,
-              homeTeam,
-              homeTeamGoals,
-              awayTeam,
-              awayTeamGoals,
-              inProgress,
-            }) => (
-              <tr key={id}>
-                <td>{homeTeam.teamName}</td>
-                <td>{homeTeamGoals}</td>
-                <td>X</td>
-                <td>{awayTeamGoals}</td>
-                <td>{awayTeam.teamName}</td>
-                <td>
-                  <div>
-                    {inProgress ? <p>Em andamento</p> : <p>Finalizado</p>}
-                  </div>
-                  {isAdm ? (
-                    <button
-                      type='button'
-                      disabled={!inProgress}
-                      onClick={() => {
-                        navigate('/matches/settings', {
-                          state: {
-                            id,
-                            homeTeam,
-                            homeTeamGoals,
-                            awayTeam,
-                            awayTeamGoals,
-                            inProgress,
-                          },
-                        });
-                        localStorage.setItem('game', 'editar');
-                      }}
-                    >
-                      {inProgress ? (
-                        <img src={editIcon} alt='Jogo em andamento' />
-                      ) : (
-                        <img src={check} alt='Jogo finalizado' />
-                      )}
-                    </button>
-                  ) : null}
-                </td>
-              </tr>
-            )
-          )}
-      </tbody>
-    </table>
+    <section>
+      <div className='flex flex-col items-center'>
+        {games.map(({ homeTeam, homeTeamGoals, awayTeam, awayTeamGoals }) => (
+          <div key={uuidv4} className='flex bg-white border'>
+            <div>
+              <img
+                src={getTeamLogo(homeTeam.teamName)}
+                alt={`${homeTeam.teamName} Logo`}
+                className='h-16'
+              />
+              <span>{homeTeam.teamName.slice(0, 3)}</span>
+            </div>
+            <div>
+              <span>{homeTeamGoals}</span>
+              <span> x </span>
+              <span>{awayTeamGoals}</span>
+            </div>
+            <div>
+              <img
+                src={getTeamLogo(awayTeam.teamName)}
+                alt={`${awayTeam.teamName} Logo`}
+                className='h-16'
+              />
+              <span>{awayTeam.teamName.slice(0, 3)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 
