@@ -5,11 +5,11 @@ const MatchTeamCard = ({ teamName }) => {
   const { getTeamLogo } = useContext(GlobalContext);
 
   return (
-    <div>
+    <div className='text-center'>
       <img
         src={getTeamLogo(teamName)}
         alt={`${teamName} Logo`}
-        className='h-16'
+        className='h-14'
       />
       <span>{teamName.slice(0, 3)}</span>
     </div>
