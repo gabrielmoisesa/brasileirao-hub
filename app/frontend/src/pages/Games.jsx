@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import GamesTable from '../components/GamesTable';
-import AddNewMatchBtn from '../components/AddNewMatchBtn';
 import GamerFilter from '../components/GameFilter';
+import NavBtn from '../components/NavBtn';
 
 const Games = () => {
   const [currentFilter, setCurrentFilter] = useState('Status do Jogo');
@@ -21,7 +21,13 @@ const Games = () => {
             currentFilter={currentFilter}
             setCurrentFilter={setCurrentFilter}
           />
-          {isAdm ? <AddNewMatchBtn /> : null}
+          {isAdm ? (
+            <NavBtn
+              link={'/matches/settings'}
+              text={'+ Adicionar nova partida'}
+              className={'underline font-bold'}
+            />
+          ) : null}
         </div>
         <GamesTable currentFilter={currentFilter} isAdm={isAdm} />
       </section>
