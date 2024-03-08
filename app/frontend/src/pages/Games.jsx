@@ -25,7 +25,7 @@ const Games = () => {
             <NavBtn
               link={'/matches/settings'}
               text={'+ Adicionar nova partida'}
-              className={'underline font-bold'}
+              className={'underline font-semibold'}
             />
           ) : null}
         </div>
