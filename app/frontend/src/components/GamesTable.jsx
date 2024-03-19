@@ -21,7 +21,7 @@ const GamesTable = ({ currentFilter, isAdm }) => {
 
   return (
     <div>
-      <div className='flex flex-col items-center space-y-4'>
+      <div className='space-y-4'>
         {games.map(
           ({
             id,
@@ -31,7 +31,10 @@ const GamesTable = ({ currentFilter, isAdm }) => {
             awayTeam,
             awayTeamGoals,
           }) => (
-            <>
+            <div
+              key={uuidv4()}
+              className='flex flex-col items-center space-y-4'
+            >
               <span>{`Partida #${id}`}</span>
               <div
                 key={uuidv4()}
@@ -62,7 +65,7 @@ const GamesTable = ({ currentFilter, isAdm }) => {
                   }}
                 />
               </div>
-            </>
+            </div>
           )
         )}
       </div>
